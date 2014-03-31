@@ -1,5 +1,5 @@
-#include <iostream>
-
+#ifndef __CELL_H__
+#define __CELL_H__
 
 class Cell {
 	int r, c; // The row and column that the cell is.
@@ -12,3 +12,5 @@ class Cell {
 	char getSymbol();
 	void init(int r, int c);
 };
+
+#endif

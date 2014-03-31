@@ -1,14 +1,8 @@
 #include "cell.h"
-#include <iostream>
 
 using namespace std;
 
-Cell::Cell() {
-	this->r = 0;
-	this->c = 0;
-	this->symbol = ' '; // All characters should be a space initially.
-	this->occupied = false;
-}
+Cell::Cell() : r(0), c(0), symbol(' '), occupied(false){} // all characters should be a space initially
 
 bool Cell::isOccupied() {
 	return this->occupied;
@@ -28,6 +22,4 @@ char Cell::getSymbol() {
 void Cell::init(int r, int c) {
 	this->r = r;
 	this->c = c;
-	this->symbol = getSymbol();
-	this->occupied = isOccupied();
 }
