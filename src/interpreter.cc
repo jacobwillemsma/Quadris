@@ -195,9 +195,15 @@ bool interpreter::processCommand(string command) {
 
 bool interpreter::multipleCommand(int multiplier, string command) {
 	if (isValid(command)) {
-		for (int i = 0; i < multiplier; i++)
-			processCommand(command);
-		return true;
+		if (isRestart(command)) {
+			// Restart game
+			return true;
+		}
+		else {
+			for (int i = 0; i < multiplier; i++)
+				processCommand(command);
+			return true;
+		}
 	}
 	else
 		return false;
