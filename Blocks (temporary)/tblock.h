@@ -18,6 +18,8 @@ class TBlock : public Block{
 	void clockwise();
 	void counterclockwise();
 	
+	int * getPositions();
+	
 	TBlock(int lvl);
 	~TBlock();
 };

@@ -14,6 +14,8 @@ class ZBlock : public Block{
 	void clockwise();
 	void counterclockwise();
 	
+	int * getPositions();
+	
 	ZBlock(int lvl);
 	~ZBlock();
 };

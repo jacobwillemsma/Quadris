@@ -37,6 +37,10 @@ void SBlock::counterclockwise(){
 	clockwise();
 }
 
+int * SBlock::getPositions(){
+	return positions;
+}
+
 SBlock::SBlock(int lvl) : level(lvl), type('S'){
 	positions = new int[8];
 	

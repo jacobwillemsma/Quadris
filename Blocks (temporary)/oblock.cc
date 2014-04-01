@@ -28,6 +28,10 @@ void OBlock::clockwise(){} // nothing happens when an OBlock is rotated
 
 void OBlock::counterclockwise(){} // nothing happens when an OBlock is rotated
 
+int * OBlock::getPositions(){
+	return positions;
+}
+
 OBlock::OBlock(int lvl) : level(lvl), type('O'){
 	positions = new int[8];
 	

@@ -37,6 +37,10 @@ void ZBlock::counterclockwise(){
 	clockwise();
 }
 
+int * ZBlock::getPositions(){
+	return positions;
+}
+
 ZBlock::ZBlock(int lvl) : level(lvl), type('Z'){
 	positions = new int[8];
 	

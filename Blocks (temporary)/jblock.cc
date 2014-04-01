@@ -38,6 +38,10 @@ void JBlock::counterclockwise(){
 	else if(positons[0] == 0 && positions[1] == 0){ configThree(); } // fourth config. to third
 }
 
+int * JBlock::getPositions(){
+	return positions;
+}
+
 JBlock::JBlock(int lvl) : level(lvl), type('J'){
 	positions = new int[8];
 	

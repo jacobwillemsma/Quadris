@@ -12,11 +12,16 @@
 #include "display.h"
 //#include "xwindow.h"
 #include <iostream>
+#include <string>
 
 class Grid {
 	Cell **board;
 	Block current;
 	Block next;
+	int *currentPositions;
+	int currentBlockHeight;
+	int level;
+	std::string source;
 	const int boardHeight = 15;
 	const int boardWidth = 10;
 	Display *d;
@@ -43,6 +48,9 @@ class Grid {
 	void drop();
 	void left();
 	void right();
+	
+	void levelUp();
+	void levelDown();
 	
 	
 	Cell getLocation(int r, int c);

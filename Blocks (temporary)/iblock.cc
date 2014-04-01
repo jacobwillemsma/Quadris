@@ -37,6 +37,10 @@ void IBlock::counterclockwise(){
 	clockwise();
 }
 
+int * IBlock::getPositions(){
+	return positions;
+}
+
 IBlock::IBlock(int lvl) : level(lvl), type('I'){
 	positions = new int[8];
 	

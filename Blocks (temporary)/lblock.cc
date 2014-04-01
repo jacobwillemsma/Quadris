@@ -38,6 +38,10 @@ void LBlock::counterclockwise(){
 	else if(positons[0] == 0 && positions[1] == 0 && positiosn[2] == 1){ configThree(); } // fourth config. to third
 }
 
+int * LBlock::getPositions(){
+	return positions;
+}
+
 LBlock::LBlock(int lvl) : level(lvl), type('J'){
 	positions = new int[8];
 	

@@ -16,6 +16,8 @@ class Block{
 	virtual void clockwise();
 	virtual void counterclockwise();
 	
+	virtual int * getPositions();
+	
 	Block();
 	virtual ~Block() = 0;
 };

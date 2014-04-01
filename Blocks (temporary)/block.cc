@@ -11,5 +11,6 @@ void Block::down(){}
 void Block::drop(){}
 void Block::clockwise(){}
 void Block::counterclockwise(){}
+int * Block::getPositions(){}
 
 Block::~Block(){}

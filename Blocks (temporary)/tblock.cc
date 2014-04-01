@@ -26,49 +26,36 @@ void TBlock::drop(){
 
 void TBlock::clockwise(){
 	if(positons[0] == 0 && positions[1] == 1 && positions[3] == 0){ // first config. to second
-		positions[0] = 0;
-		positions[1] = 2;
-		positions[2] = 0;
-		positions[3] = 1;
-		positions[4] = 0;
-		positions[5] = 0;
-		positions[6] = 1;
-		positions[7] = 2;
+		configTwo();
 	}
 	else if(positons[0] == 0 && positions[1] == 2){ // second config. to third
-		positions[0] = 0;
-		positions[1] = 1;
-		positions[2] = 1;
-		positions[3] = 1;
-		positions[4] = 2;
-		positions[5] = 1;
-		positions[6] = 2;
-		positions[7] = 0;
+		configThree();
 	}
 	else if(positons[0] == 0 && positions[1] == 2 && positions[3] == 1){ // third config. to fourth
-		positions[0] = 0;
-		positions[1] = 0;
-		positions[2] = 1;
-		positions[3] = 2;
-		positions[4] = 1;
-		positions[5] = 1;
-		positions[6] = 1;
-		positions[7] = 0;
+		configFour();
 	}
 	else if(positons[0] == 0 && positions[1] == 0){ // fourth config. to first
-		positions[0] = 0;
-		positions[1] = 1;
-		positions[2] = 0;
-		positions[3] = 0;
-		positions[4] = 1;
-		positions[5] = 0;
-		positions[6] = 2;
-		positions[7] = 0;
+		configOne();
 	}
 }
 
 void TBlock::counterclockwise(){
+	if(positons[0] == 0 && positions[1] == 1 && positions[3] == 0){ // first config. to fourth
+		configFour();
+	}
+	else if(positons[0] == 0 && positions[1] == 2){ // second config. to first
+		configOne();
+	}
+	else if(positons[0] == 0 && positions[1] == 2 && positions[3] == 1){ // third config. to second
+		configTwo();
+	}
+	else if(positons[0] == 0 && positions[1] == 0){ // fourth config. to third
+		configThree();
+	}
+}
 
+int * TBlock::getPositions(){
+	return positions;
 }
 
 TBlock::TBlock(int lvl) : level(lvl), type('J'){

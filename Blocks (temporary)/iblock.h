@@ -14,6 +14,8 @@ class IBlock : public Block{
 	void clockwise();
 	void counterclockwise();
 	
+	int * getPositions();
+	
 	IBlock(int lvl);
 	~IBlock();
 };
