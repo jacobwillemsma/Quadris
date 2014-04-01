@@ -49,6 +49,8 @@ void Board::gameStart(){
 		current = getBlock(source);
 		next = getBlock(source);
 	}
+	
+	updateDisplay();
 }
 
 void Board::rowsChecker(){
@@ -94,6 +96,7 @@ void Board::updateDisplay(){
 			theBoard[i][j].notifyDisplay(*td);
 		}
 	}
+	td->displayUpdate(level, score, hiScore, next.getType());
 }
 
 

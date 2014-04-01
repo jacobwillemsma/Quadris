@@ -15,6 +15,8 @@ class Block{
 	bool right(); // moves the Block to the right, returns false if out of bounds, true otherwise
 	bool down(); // moves the Block down, returns false if out of bounds, true otherwise
 	
+	char getType(); // returns the char of the block
+	
 	// the turning functions of the Blocks are virtual as they are different for different types of Block, returns true if a valid move
 	virtual bool clockwise(int r, int c) = 0;
 	virtual bool counterclockwise(int r, int c) = 0;

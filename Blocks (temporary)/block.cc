@@ -50,6 +50,11 @@ void Block::down(){
 }
 
 
+char Block::getType(){
+	return type;
+}
+
+
 void Block::clockwise(int r, int c){}
 void Block::counterclockwise(int r, int c){}
 
