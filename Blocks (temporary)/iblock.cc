@@ -4,56 +4,48 @@
 using namespace std;
 
 
-int IBlock::getLevel(){
-	return level;
-}
-
-void IBlock::left(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void IBlock::right(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void IBlock::down(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void IBlock::drop(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void IBlock::clockwise(){
-	int temp;
-	for(int i = 0; i < 7; i = i + 2){
-		temp = positions[i];
-		positions[i] = positions[i+1];
-		positions[i+1] = temp;
+bool IBlock::clockwise(int r, int c){ // r and c not needed here
+	if(positions[0] == positions[2]){
+		positions[0] -= 3;
+		// positions[1] does not change
+		positions[2] -= 2;
+		positions[3] -= 1;
+		positions[4] -= 1;
+		positions[5] -= 2;
+		// positions[6] does not change
+		positions[7] -= 3;
 	}
+	else if(positions[1] == positions[3]){
+		positions[0] += 3;
+		// positions[1] does not change
+		positions[2] += 2;
+		positions[3] += 1;
+		positions[4] += 1;
+		positions[5] += 2;
+		// positions[6] does not change
+		positions[7] += 3;
+	}
+	
+	return inRange();
 }
 
-void IBlock::counterclockwise(){
-	clockwise();
+bool IBlock::counterclockwise(int r, int c){ // r and c not needed here
+	return clockwise();
 }
 
-int * IBlock::getPositions(){
-	return positions;
-}
-
-IBlock::IBlock(int lvl) : level(lvl), type('I'){
+IBlock::IBlock(int lvl) : Block(lvl), type('I'){
 	positions = new int[8];
 	
 	positions[0] = 0;
 	positions[1] = 0;
-	positions[2] = 1;
-	positions[3] = 0;
-	positions[4] = 2;
-	positions[5] = 0;
-	positions[6] = 3;
-	positions[7] = 0;
+	positions[2] = 0;
+	positions[3] = 1;
+	positions[4] = 0;
+	positions[5] = 2;
+	positions[6] = 0;
+	positions[7] = 3;
 }
-
+/*
 IBlock::~IBlock(){
 	delete [] positions;
-}
+} */

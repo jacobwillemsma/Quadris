@@ -6,13 +6,8 @@
 
 class OBlock : public Block{
   public:
-	int getLevel();
-	void left();
-	void right();
-	void down();
-	void drop();
-	void clockwise();
-	void counterclockwise();
+	bool clockwise(int r, int c);
+	bool counterclockwise(int r, int c);
 	
 	OBlock(int lvl);
 	~OBlock();

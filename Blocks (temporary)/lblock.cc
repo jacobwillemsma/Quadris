@@ -3,49 +3,46 @@
 
 using namespace std;
 
-
-int LBlock::getLevel(){
-	return level;
-}
-
-void LBlock::left(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void LBlock::right(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void LBlock::down(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void LBlock::drop(){
-	// currently does nothing.. should probably be handled by Grid
-}
-
-void LBlock::clockwise(){
-	if(positons[0] == 0 && positions[1] == 0){ configTwo(); } // first config. to second
-	else if(positons[0] == 0 && positions[1] == 2 && positiosn[2] == 0){ configThree(); } // second config. to third
-	else if(positons[0] == 0 && positions[1] == 1){ configFour(); } // third config. to fourth
-	else if(positons[0] == 0 && positions[1] == 0 && positiosn[2] == 1){ configOne(); } // fourth config. to first
-}
-
-void LBlock::counterclockwise(){
-	if(positons[0] == 0 && positions[1] == 1){ configFour(); } // first config. to fourth
-	else if(positons[0] == 0 && positions[1] == 2 && positiosn[2] == 0){ configOne(); } // second config. to first
-	else if(positons[0] == 0 && positions[1] == 2){ configTwo(); } // third config. to second
-	else if(positons[0] == 0 && positions[1] == 0 && positiosn[2] == 1){ configThree(); } // fourth config. to third
-}
-
-int * LBlock::getPositions(){
-	return positions;
-}
-
-LBlock::LBlock(int lvl) : level(lvl), type('J'){
-	positions = new int[8];
+bool LBlock::clockwise(int r, int c){
+	row = r;
+	col = c;
 	
-	configOne();
+	if(config == 1){ configTwo(); } // first config. to second
+	else if(config == 2){ configThree(); } // second config. to third
+	else if(config == 3){ configFour(); } // third config. to fourth
+	else{ configOne(); } // fourth config. to first
+	
+	++config;
+	
+	return inRange();
+}
+
+bool LBlock::counterclockwise(int r, int c){
+	row = r;
+	col = c;
+	
+	if(config == 1){ configFour(); } // first config. to fourth
+	else if(config == 2){ configOne(); } // second config. to first
+	else if(config == 3){ configTwo(); } // third config. to second
+	else{ configThree(); } // fourth config. to third
+	
+	--config;
+	
+	return inRange();
+}
+
+LBlock::LBlock(int lvl) : Block(lvl), type('L'){
+	positions = new int[8];
+	config == 1;
+	
+	positions[0] = 1;
+	positions[1] = 0;
+	positions[2] = 1;
+	positions[3] = 1;
+	positions[4] = 0;
+	positions[5] = 2;
+	positions[6] = 1;
+	positions[7] = 2;
 }
 
 LBlock::~LBlock(){
@@ -53,45 +50,45 @@ LBlock::~LBlock(){
 }
 
 void LBlock::configOne(){
-	positions[0] = 0;
-	positions[1] = 0;
-	positions[2] = 1;
-	positions[3] = 0;
-	positions[4] = 2;
-	positions[5] = 1;
-	positions[6] = 2;
-	positions[7] = 0;
+	positions[0] = r;
+	positions[1] = c;
+	positions[2] = r;
+	positions[3] = c+1;
+	positions[4] = r-1;
+	positions[5] = c+2;
+	positions[6] = r;
+	positions[7] = c+2;
 }
 
 void LBlock::configTwo(){
-	positions[0] = 0;
-	positions[1] = 2;
-	positions[2] = 0;
-	positions[3] = 1;
-	positions[4] = 0;
-	positions[5] = 0;
-	positions[6] = 1;
-	positions[7] = 0;
+	positions[0] = r-2;
+	positions[1] = c;
+	positions[2] = r-1;
+	positions[3] = c;
+	positions[4] = r;
+	positions[5] = c;
+	positions[6] = r;
+	positions[7] = c+1;
 }
 
 void LBlock::configThree(){
-	positions[0] = 0;
-	positions[1] = 1;
-	positions[2] = 0;
-	positions[3] = 0;
-	positions[4] = 1;
-	positions[5] = 1;
-	positions[6] = 2;
-	positions[7] = 1;
+	positions[0] = r-1;
+	positions[1] = c;
+	positions[2] = r;
+	positions[3] = c;
+	positions[4] = r-1;
+	positions[5] = c+1;
+	positions[6] = r-1;
+	positions[7] = c+2;
 }
 
 void LBlock::configFour(){
-	positions[0] = 0;
-	positions[1] = 2;
-	positions[2] = 1;
-	positions[3] = 2;
-	positions[4] = 1;
-	positions[5] = 1;
-	positions[6] = 1;
-	positions[7] = 0;
+	positions[0] = r-2;
+	positions[1] = c;
+	positions[2] = r-2;
+	positions[3] = c+1;
+	positions[4] = r-1;
+	positions[5] = c+1;
+	positions[6] = r;
+	positions[7] = c+1;
 }

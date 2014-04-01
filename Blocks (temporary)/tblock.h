@@ -5,20 +5,14 @@
 
 
 class TBlock : public Block{
+	int config;
 	void configOne();
 	void configTwo();
 	void configThree();
 	void configFour();
   public:
-	int getLevel();
-	void left();
-	void right();
-	void down();
-	void drop();
-	void clockwise();
-	void counterclockwise();
-	
-	int * getPositions();
+	bool clockwise(int r, int c);
+	bool counterclockwise(int r, int c);
 	
 	TBlock(int lvl);
 	~TBlock();

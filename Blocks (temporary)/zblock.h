@@ -6,15 +6,8 @@
 
 class ZBlock : public Block{
   public:
-	int getLevel();
-	void left();
-	void right();
-	void down();
-	void drop();
-	void clockwise();
-	void counterclockwise();
-	
-	int * getPositions();
+	bool clockwise(int r, int c);
+	bool counterclockwise(int r, int c);
 	
 	ZBlock(int lvl);
 	~ZBlock();

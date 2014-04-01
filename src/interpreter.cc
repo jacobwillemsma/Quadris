@@ -3,7 +3,7 @@
 #include "block.h"
 using namespace std;
 
-bool interpreter::isLeft(string command) {
+bool Interpreter::isLeft(string command) {
 	if (command.length == 3)
 		return command == "lef";
 	else if (command.length == 4)
@@ -12,7 +12,7 @@ bool interpreter::isLeft(string command) {
 		return false;
 }
 
-bool interpreter::isRight(string command) {
+bool Interpreter::isRight(string command) {
 	if (command.length == 2)
 		return command == "ri";
 	else if (command.length == 3)
@@ -25,7 +25,7 @@ bool interpreter::isRight(string command) {
 		return false;
 }
 
-bool interpreter::isDown(string command) {
+bool Interpreter::isDown(string command) {
 	if (command.length == 2)
 		return command == "do";
 	else if (command.length == 3)
@@ -36,7 +36,7 @@ bool interpreter::isDown(string command) {
 		return false;
 }
 
-bool interpreter::isClockwise(string command) {
+bool Interpreter::isClockwise(string command) {
 	if (command.length == 2)
 		return command == "cl";
 	else if (command.length == 3)
@@ -57,7 +57,7 @@ bool interpreter::isClockwise(string command) {
 		return false;
 }
 
-bool interpreter::isCounterClockwise(string command) {
+bool Interpreter::isCounterClockwise(string command) {
 	if (command.length == 2)
 		return command == "co";
 	else if (command.length == 3)
@@ -92,7 +92,7 @@ bool interpreter::isCounterClockwise(string command) {
 		return false;
 }
 
-bool interpreter::isDrop(string command) {
+bool Interpreter::isDrop(string command) {
 	if (command.length == 2)
 		return command == "dr";
 	else if (command.length == 3)
@@ -103,7 +103,7 @@ bool interpreter::isDrop(string command) {
 		return false;
 }
 
-bool interpreter::isLevelUp(string command) {
+bool Interpreter::isLevelUp(string command) {
 	if (command.length == 6)
 		return command == "levelu";
 	else if (command.length == 7)
@@ -112,7 +112,7 @@ bool interpreter::isLevelUp(string command) {
 		return false;
 }
 
-bool interpreter::isLevelDown(string command) {
+bool Interpreter::isLevelDown(string command) {
 	if (command.length == 6)
 		return command == "leveld";
 	else if (command.length == 7)
@@ -125,7 +125,7 @@ bool interpreter::isLevelDown(string command) {
 		return false;
 }
 
-bool interpreter::isRestart(string command) {
+bool Interpreter::isRestart(string command) {
 	if (command.length == 2)
 		return command == "re";
 	else if (command.length == 3)
@@ -142,11 +142,11 @@ bool interpreter::isRestart(string command) {
 		return false;
 }
 
-bool interpreter::isValid(string command) {
+bool Interpreter::isValid(string command) {
 	return (isLeft(command) || isRight(command) || isDown(command) || isClockwise(command) || isCounterClockwise(command) || isDrop(command) || isLevelUp(command) || isLevelDown(command) || isRestart);
 }
 
-bool interpreter::processCommand(string command) {
+bool Interpreter::processCommand(string command) {
 	if (isValid(command)) {
 		return false;
 		if (isLeft(command)) {
@@ -193,7 +193,7 @@ bool interpreter::processCommand(string command) {
 		return false;
 }
 
-bool interpreter::multipleCommand(int multiplier, string command) {
+bool Interpreter::multipleCommand(int multiplier, string command) {
 	if (isValid(command)) {
 		if (isRestart(command)) {
 			// Restart game
