@@ -8,7 +8,7 @@ bool Block::inRange(){
 	
 	// if any positions are out of range, returns false
 	for(int i = 0; i < 8; ++i){
-		if(*positions[i] < 0 || *positions[i] > 15)
+		if(positions[i] < 0 || positions[i] > 15)
 			return false;
 	}
 	
@@ -65,5 +65,4 @@ void Block::setPositions(int * pos){
 	}
 }
 
-Block::Block(int lvl) : level(lvl){}
-Block::~Block(){}
+Block::Block(int lvl) : positions(0), level(lvl){}

@@ -35,7 +35,7 @@ void Cell::notify(){
 
 void Cell::notifyNeighbours(){
 	for(int i = 0; i < numNeighbours; ++i){
-		neighbours[i].notify();
+		neighbours[i]->notify();
 	}
 }
 

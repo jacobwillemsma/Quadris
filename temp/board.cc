@@ -1,30 +1,36 @@
-#include "cell.h"
-#include "textdisplay.h"
-//#include "xwindow.h"
+#include "board.h"
 #include <string>
 
 using namespace std;
 
 void Board::clearBoard(){
 	// clears the Board by deleting all Cells
-	for(int i = 0; i < boardHeight; ++i){
-		delete [] board[i];
+	for(int i = 0; i < BOARD_HEIGHT; ++i){
+		delete [] theBoard[i];
 	}
 	delete current;
 	delete next;
+	delete score;
 }
 
 void Board::clearRow(int r){
 	for(int i = 0; i < BOARD_WIDTH; ++i){
 		if(theBoard[r][i].clearCell())
 			//update the score somehow...  score.update()?
+			int filler = 0;
 	}
 }
 
-void Board::gameStart(){
+void Board::gameStart(int lvl){
 	// should only be called to start a new game, ie board and all relevant variables are cleared
 	
-	theBoard = new Cell*[boardHeight];
+	theBoard = new Cell*[BOARD_HEIGHT];
+	currentPosition = new int [8];
+	nextPosition = new int [8];
+	
+	// LEVEL STUFF
+	level = lvl;
+	
 	
 	// fills the new Board with cells
 	for(int i = 0; i < BOARD_HEIGHT; ++i){
@@ -32,8 +38,8 @@ void Board::gameStart(){
 	}
 	
 	// sets the coordinates for the cells
-	for(int i = 0; i < n; ++i){
-		for(int j = 0; j < n; ++j){
+	for(int i = 0; i < BOARD_HEIGHT; ++i){
+		for(int j = 0; j < BOARD_WIDTH; ++j){
 			theBoard[i][j].init(i,j);
 		}
 	}
@@ -41,14 +47,14 @@ void Board::gameStart(){
 	// nextBlock nb = new NextBlock?
 	
 	// need a next block somehow, the implementation of that is unclear
-	if(source == "rand"){
+	/*if(source == "rand"){
 		current = getRandBlock();
 		next = getRandBlock();
 	}
 	else{
 		current = getBlock(source);
 		next = getBlock(source);
-	}
+	}*/
 	
 	updateDisplay();
 }
@@ -60,7 +66,7 @@ void Board::rowsChecker(){
 	}
 }
 
-void Board::rowFull(int r){
+bool Board::rowFull(int r){
 	for(int i = 0; i < BOARD_WIDTH; ++i){
 		if(!isOccupied(r, i)) return false;
 	}
@@ -87,6 +93,7 @@ void Board::revert(int move){ // reverts the move
 
 bool Board::gameOver(){
 	// might be handled differently.. will wait on this
+	return false;
 }
 
 // updates the display
@@ -96,13 +103,14 @@ void Board::updateDisplay(){
 			theBoard[i][j].notifyDisplay(*td);
 		}
 	}
-	td->displayUpdate(level, score, hiScore, next.getType());
+	td->displayUpdate(level, score->getScore(), score->getHighScore(), next->getType());
 }
 
 
-Board::Board() : theBoard(0), level(0){
-	d = new Display(BOARD_HEIGHT, BOARD_WIDTH);
+Board::Board() : theBoard(0), current(0), next(0), level(0), currentPosition(0), nextPosition(0){
+	td = new TextDisplay(BOARD_HEIGHT, BOARD_WIDTH);
 	gameStart(0);
+	score = new Score();
 }
 
 Board::~Board(){
@@ -110,15 +118,15 @@ Board::~Board(){
 	for(int i = 0; i < BOARD_HEIGHT; ++i){
 		delete [] theBoard[i];
 	}
-	delete d;
+	delete td;
 	// delete xw;
 }
 
 
 
 bool Board::down(){
-	bool valid = current.down();
-	nextPosition = current.getPositions();
+	bool valid = current->down();
+	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
@@ -127,8 +135,8 @@ bool Board::down(){
 	}
 	
 	if(valid){
-		for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
-			currentPosition[i][i+1] = nextPosition[i][i+1];
+		for(int i = 0; i < BLOCK_SIZE*2; ++i){
+			currentPosition[i] = nextPosition[i];
 		}
 		updateDisplay();
 	}
@@ -140,8 +148,8 @@ bool Board::down(){
 }
 
 bool Board::left(){
-	bool valid = current.left();
-	nextPosition = current.getPositions();
+	bool valid = current->left();
+	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
@@ -150,8 +158,8 @@ bool Board::left(){
 	}
 	
 	if(valid){
-		for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
-			currentPosition[i][i+1] = nextPosition[i][i+1];
+		for(int i = 0; i < BLOCK_SIZE*2; ++i){
+			currentPosition[i] = nextPosition[i];
 		}
 		updateDisplay();
 	}
@@ -163,8 +171,8 @@ bool Board::left(){
 }
 
 bool Board::right(){
-	bool valid = current.right();
-	nextPosition = current.getPositions();
+	bool valid = current->right();
+	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
@@ -173,8 +181,8 @@ bool Board::right(){
 	}
 	
 	if(valid){
-		for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
-			currentPosition[i][i+1] = nextPosition[i][i+1];
+		for(int i = 0; i < BLOCK_SIZE*2; ++i){
+			currentPosition[i] = nextPosition[i];
 		}
 		updateDisplay();
 	}
@@ -186,8 +194,8 @@ bool Board::right(){
 }
 
 bool Board::clockwise(){
-	bool valid = current.clockwise();
-	nextPosition = current.getPositions();
+	bool valid = current->clockwise();
+	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
@@ -196,8 +204,8 @@ bool Board::clockwise(){
 	}
 	
 	if(valid){
-		for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
-			currentPosition[i][i+1] = nextPosition[i][i+1];
+		for(int i = 0; i < BLOCK_SIZE*2; ++i){
+			currentPosition[i] = nextPosition[i];
 		}
 		updateDisplay();
 	}
@@ -209,8 +217,8 @@ bool Board::clockwise(){
 }
 
 bool Board::counterclockwise(){
-	bool valid = current.counterclockwise();
-	nextPosition = current.getPositions();
+	bool valid = current->counterclockwise();
+	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
@@ -219,8 +227,8 @@ bool Board::counterclockwise(){
 	}
 	
 	if(valid){
-		for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
-			currentPosition[i][i+1] = nextPosition[i][i+1];
+		for(int i = 0; i < BLOCK_SIZE*2; ++i){
+			currentPosition[i] = nextPosition[i];
 		}
 		updateDisplay();
 	}

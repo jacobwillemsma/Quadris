@@ -5,7 +5,7 @@ class Block{
   protected:
 	int level; // the game level that the block was created on.
 	char type; // the char representing the block
-	int * positions[8]; // an array containing the y and x coordinates (one after another) of the Block's 'Cells'
+	int * positions; // an array containing the y and x coordinates (one after another) of the Block's 'Cells'
 	bool inRange(); // checks to make sure the Block is still in range
 
   public:
