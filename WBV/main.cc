@@ -13,10 +13,11 @@ using namespace std;
 int main(int argc, const char * argv[]) {
 
 	Board *b = new Board();
-	Interpreter *i = new Interpreter;
-	string command;
-	Block *blo = new Block();
+	Interpreter *i = new Interpreter();
+	Block *blo = new Block(b);
+	
 
+	string command;
 	while (cin >> command) {
 		i->processCommand(command, blo, b);
 		// Print out the board every time.

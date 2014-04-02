@@ -1,8 +1,7 @@
 #include "board.h"
-#include 
 using namespace std;
 
-Board::Board() {
+Board::Board(){
 	BOARD_WIDTH = 10;
 	BOARD_HEIGHT = 18;
 	td = new TextDisplay(BOARD_HEIGHT, BOARD_WIDTH);
@@ -21,6 +20,7 @@ bool Board::isOccupied(int r, int c) {
 }
 
 void Board::update(int r, int c, char type) {
+	theBoard[r][c].setSymbol(type);
 	td->notify(r, c, type);
 }
 

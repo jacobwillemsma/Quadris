@@ -6,7 +6,7 @@
 class Block {
 	int level;
 	char type;
-	Coordinate *positions[4];
+	Coordinate *positions;
 
 	bool canShiftLeft(Board *b);
 	bool canShiftRight(Board *b);
@@ -15,11 +15,16 @@ class Block {
 	//canRotateCounterClockwise(Coordinate c, Board *b);
 	
   public:
-  	Block();
-  	void left(Board *b);
-  	void right(Board *b);
-  	void down(Board *b);
-  	void drop(Board *b);
+	Block(Board *b);
+	~Block();
+	
+	void left(Board *b);
+	void right(Board *b);
+	void down(Board *b);
+	void drop(Board *b);
+	
+	int getLevel();
+	char getType();
 };
 
 #endif
