@@ -146,46 +146,64 @@ bool Interpreter::isValid(string command) {
 	return (isLeft(command) || isRight(command) || isDown(command) || isClockwise(command) || isCounterClockwise(command) || isDrop(command) || isLevelUp(command) || isLevelDown(command) || isRestart);
 }
 
-bool Interpreter::processCommand(string command) {
+bool Interpreter::processCommand(string command, Board *b) {
 	if (isValid(command)) {
 		return false;
 		if (isLeft(command)) {
 			// Move block to the left
-			return true;
+			if (b->left())
+				return true;
+			else 
+				return false;
 		}
 		else if (isRight(command)) {
-			// Move block to the right
-			return true;
+			if (b->right())
+				return true;
+			else
+				return false;
 		}
 		else if (isDown(command)) {
 			// Move block down
-			return true;
+			if (b->down())
+				return true;
+			else 
+				return false;
 		}
 		else if (isClockwise(command)) {
 			// Turn block clockwise
-			return true;
+			if (b->clockwise())
+				return true;
+			else 
+				return false;
 		}
 		else if (isCounterClockwise(command)) {
 			// Turn block counterclockwise
-			return true;
+			if (b->counterclockwise())
+				return true;
+			else 
+				return false;
 		}
 		else if (isDrop(command)) {
 			// Drops the block
-			/*if (drop function false)
-				endgame*/
-			else
+			if (b->drop())
 				return true;
+			else 
+				return false;
+			// Somewhere in here the game may need to end?  Maybe we'll just check seperately in the main program.
 		}
 		else if (isLevelUp(command)) {
-			// increase the level
+			b->levelUp();
 			return true;
+			// May want to check bounds on this (max/min levels)
 		}
 		else if (isLevelDown(command)) {
 			// Decrease the level
+			b->levelDown();
 			return true;
 		}
 		else if (isRestart(command)) {
 			// Restart the game
+			b->restartGame();
 			return true;
 		}
 	}
@@ -193,7 +211,7 @@ bool Interpreter::processCommand(string command) {
 		return false;
 }
 
-bool Interpreter::multipleCommand(int multiplier, string command) {
+bool Interpreter::multipleCommand(int multiplier, string command, Board *b) {
 	if (isValid(command)) {
 		if (isRestart(command)) {
 			// Restart game
@@ -201,7 +219,7 @@ bool Interpreter::multipleCommand(int multiplier, string command) {
 		}
 		else {
 			for (int i = 0; i < multiplier; i++)
-				processCommand(command);
+				processCommand(command, b);
 			return true;
 		}
 	}

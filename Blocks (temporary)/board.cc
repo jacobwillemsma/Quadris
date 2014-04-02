@@ -295,4 +295,4 @@ void Board::restartGame(){
 
 ostream &Board::operator<<(ostream &out, Board b){
 	// do the printings
-}
+}
