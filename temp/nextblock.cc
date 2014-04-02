@@ -1,5 +1,5 @@
 #include "nextblock.h"
-#include <csstdlib> // used for rand function
+#include <cstdlib> // used for rand function
 
 using namespace std;
 
@@ -73,6 +73,6 @@ char NextBlock::getBlockType(){
 		else if(random == 7 || random == 8)
 			return 'S';
 	}
+	
+	return 0;
 }
-
-

@@ -29,10 +29,10 @@ bool SBlock::clockwise(int r, int c){
 }
 
 bool SBlock::counterclockwise(int r, int c){
-	return clockwise();
+	return clockwise(r, c);
 }
 
-SBlock::SBlock(int lvl) : Block(lvl), type('S'){
+SBlock::SBlock(int lvl) : Block(lvl, 'S'){
 	positions = new int[8];
 	
 	positions[0] = 1;

@@ -5,6 +5,8 @@
 
 
 class TBlock : public Block{
+	int row, col; // row and column of left bottom corner
+
 	int config;
 	void configOne();
 	void configTwo();

@@ -23,7 +23,7 @@ class Block{
 	int * getPositions(); // returns the current positions within the block
 	void setPositions(int * pos); // sets the positions within the block
 	
-	Block(int lvl);
+	Block(int lvl, char t);
 	virtual ~Block() = 0;
 };
 

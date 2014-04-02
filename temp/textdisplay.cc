@@ -6,7 +6,18 @@ using namespace std;
 
 // functions outlined in .h
 
-TextDisplay::TextDisplay(int r, int c) : rows(r), cols(c){
+void TextDisplay::notify(int r, int c, char ch){
+	theDisplay[r][c] = ch; // changes coordinates of the display
+}
+
+void TextDisplay::displayUpdate(int lvl, int scr, int hs, char type){
+	level = lvl;
+	score = scr;
+	hiScore = hs;
+	nextType = type;	
+}
+
+TextDisplay::TextDisplay(int r, int c) : rows(r), cols(c), level(0), score(0), hiScore(0){
 	// creates a new array of chars
 	theDisplay = new char*[r];
 	
@@ -22,60 +33,49 @@ TextDisplay::TextDisplay(int r, int c) : rows(r), cols(c){
 	}
 }
 
-void TextDisplay::notify(int r, int c, char ch){
-	theDisplay[r][c] = ch; // changes coordinates of the display
-}
-
-void TextDisplay::displayUpdate(int lvl, int scr, int hs, char type){
-	level = lvl;
-	score = scr;
-	hiScore = hs;
-	nextType = type;	
-}
-
-void TextDisplay::blockPrint(){
-	if(nextType == 'I'){
-		cout << "IIII";
-	}
-	else if(nextType == 'J'){
-		cout << "J" << endl;
-		cout << "JJJ";
-	}
-	else if(nextType == 'L'){
-		cout << "  L" << endl;
-		cout << "LLL" << endl;
-	}
-	else if(nextType == 'O'){
-		cout << "OO" << endl;
-		cout << "OO" << endl;
-	}
-	else if(nextType == 'S'){
-		cout << " SS" << endl;
-		cout << "SS" << endl;
-	}
-	else if(nextType == 'T'){
-		cout << "TTT" << endl;
-		cout << " T" << endl;
-	}
-	else if(nextType == 'Z'){
-		cout << "ZZ" << endl;
-		cout << " ZZ" << endl;
-	}
-}
-
-
 TextDisplay::~TextDisplay(){
 	// deletes the display
-	for(int i = 0; i < gridSize; ++i){
+	for(int i = 0; i < rows; ++i){ // should probably change from literal
 		delete [] theDisplay[i];
 	}
 	delete [] theDisplay;
 }
 
+// prints each type of block
+void blockPrint(char type){
+	if(type == 'I'){
+		cout << "IIII";
+	}
+	else if(type == 'J'){
+		cout << "J" << endl;
+		cout << "JJJ";
+	}
+	else if(type == 'L'){
+		cout << "  L" << endl;
+		cout << "LLL" << endl;
+	}
+	else if(type == 'O'){
+		cout << "OO" << endl;
+		cout << "OO" << endl;
+	}
+	else if(type == 'S'){
+		cout << " SS" << endl;
+		cout << "SS" << endl;
+	}
+	else if(type == 'T'){
+		cout << "TTT" << endl;
+		cout << " T" << endl;
+	}
+	else if(type == 'Z'){
+		cout << "ZZ" << endl;
+		cout << " ZZ" << endl;
+	}
+}
+
 ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct positioning for scores and such later
-	cout << "Level: " << level << endl;
-	cout << "Score: " << score << endl;
-	cout << "Hiscore: " << hiScore << endl;
+	cout << "Level: " << td.level << endl;
+	cout << "Score: " << td.score << endl;
+	cout << "Hiscore: " << td.hiScore << endl;
 	
 	cout << "----------" << endl;
 	// prints the entire Board 
@@ -85,8 +85,9 @@ ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct 
 		}
 	}
 	cout << "----------" << endl;
+	cout << "Next:" << endl;
 	
-	blockPrint();
+	blockPrint(td.nextType);
 	
 	return out;
 }

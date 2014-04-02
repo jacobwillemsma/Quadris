@@ -29,10 +29,10 @@ bool ZBlock::clockwise(int r, int c){
 }
 
 bool ZBlock::counterclockwise(int r, int c){
-	return clockwise(int r, int c);
+	return clockwise(r, c);
 }
 
-ZBlock::ZBlock(int lvl) : Block(lvl), type('Z'){
+ZBlock::ZBlock(int lvl) : Block(lvl, 'Z'){
 	positions = new int[8];
 	
 	positions[0] = 0;

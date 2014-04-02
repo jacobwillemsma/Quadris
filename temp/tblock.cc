@@ -31,8 +31,11 @@ bool TBlock::counterclockwise(int r, int c){
 	return inRange();
 }
 
-TBlock::TBlock(int lvl) : Block(lvl), type('J'){
+TBlock::TBlock(int lvl) : Block(lvl, 'T'){
 	positions = new int[8];
+	config = 1;
+	row = 1;
+	col = 0;
 	
 	positions[0] = 0;
 	positions[1] = 0;
@@ -49,45 +52,45 @@ TBlock::~TBlock(){
 }
 
 void TBlock::configOne(){
-	positions[0] = r-1;
-	positions[1] = c;
-	positions[2] = r-1;
-	positions[3] = c+1;
-	positions[4] = r;
-	positions[5] = c+1;
-	positions[6] = r-1;
-	positions[7] = c+2;
+	positions[0] = row-1;
+	positions[1] = col;
+	positions[2] = row-1;
+	positions[3] = col+1;
+	positions[4] = row;
+	positions[5] = col+1;
+	positions[6] = row-1;
+	positions[7] = col+2;
 }
 
 void TBlock::configTwo(){
-	positions[0] = r-1;
-	positions[1] = c;
-	positions[2] = r-2;
-	positions[3] = c+1;
-	positions[4] = r-1;
-	positions[5] = c+1;
-	positions[6] = r;
-	positions[7] = c+1;
+	positions[0] = row-1;
+	positions[1] = col;
+	positions[2] = row-2;
+	positions[3] = col+1;
+	positions[4] = row-1;
+	positions[5] = col+1;
+	positions[6] = row;
+	positions[7] = col+1;
 }
 
 void TBlock::configThree(){
-	positions[0] = r;
-	positions[1] = c;
-	positions[2] = r-1;
-	positions[3] = c+1;
-	positions[4] = r;
-	positions[5] = c+1;
-	positions[6] = r;
-	positions[7] = c+2;
+	positions[0] = row;
+	positions[1] = col;
+	positions[2] = row-1;
+	positions[3] = col+1;
+	positions[4] = row;
+	positions[5] = col+1;
+	positions[6] = row;
+	positions[7] = col+2;
 }
 
 void TBlock::configFour(){
-	positions[0] = r-2;
-	positions[1] = c;
-	positions[2] = r-1;
-	positions[3] = c;
-	positions[4] = r;
-	positions[5] = c;
-	positions[6] = r-1;
-	positions[7] = c+1;
+	positions[0] = row-2;
+	positions[1] = col;
+	positions[2] = row-1;
+	positions[3] = col;
+	positions[4] = row;
+	positions[5] = col;
+	positions[6] = row-1;
+	positions[7] = col+1;
 }

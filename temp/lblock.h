@@ -5,6 +5,8 @@
 
 
 class LBlock : public Block{
+	int row, col; // row and column of bottom left block
+
 	int config;
 	void configOne();
 	void configTwo();

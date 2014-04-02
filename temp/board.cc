@@ -107,7 +107,7 @@ void Board::updateDisplay(){
 }
 
 
-Board::Board() : theBoard(0), current(0), next(0), level(0), currentPosition(0), nextPosition(0){
+Board::Board() : theBoard(0), current(0), next(0), level(0), currentPosition(0), nextPosition(0), currentRow(0), currentCol(0){
 	td = new TextDisplay(BOARD_HEIGHT, BOARD_WIDTH);
 	gameStart(0);
 	score = new Score();
@@ -125,6 +125,7 @@ Board::~Board(){
 
 
 bool Board::down(){
+	++currentRow;
 	bool valid = current->down();
 	nextPosition = current->getPositions();
 	
@@ -148,6 +149,7 @@ bool Board::down(){
 }
 
 bool Board::left(){
+	--currentCol;
 	bool valid = current->left();
 	nextPosition = current->getPositions();
 	
@@ -171,6 +173,7 @@ bool Board::left(){
 }
 
 bool Board::right(){
+	++currentCol;
 	bool valid = current->right();
 	nextPosition = current->getPositions();
 	
@@ -194,7 +197,7 @@ bool Board::right(){
 }
 
 bool Board::clockwise(){
-	bool valid = current->clockwise();
+	bool valid = current->clockwise(currentRow, currentCol);
 	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
@@ -217,7 +220,7 @@ bool Board::clockwise(){
 }
 
 bool Board::counterclockwise(){
-	bool valid = current->counterclockwise();
+	bool valid = current->counterclockwise(currentRow, currentCol);
 	nextPosition = current->getPositions();
 	
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
@@ -244,32 +247,32 @@ bool Board::drop(){ // drops the current block and makes the next block the curr
 	while(down()){} // loops down as far as possible
 	
 	// there must be a better way to do this!!!!!
-	nextPosition = current.getPositions();
-	Cell *temp1 = theBoard[nextPosition[0]][nextPosition[1]];
-	Cell *temp2 = theBoard[nextPosition[2]][nextPosition[3]];
-	Cell *temp3 = theBoard[nextPosition[4]][nextPosition[5]];
-	Cell *temp4 = theBoard[nextPosition[6]][nextPosition[7]];
+	nextPosition = current->getPositions();
+	Cell temp1 = theBoard[nextPosition[0]][nextPosition[1]];
+	Cell temp2 = theBoard[nextPosition[2]][nextPosition[3]];
+	Cell temp3 = theBoard[nextPosition[4]][nextPosition[5]];
+	Cell temp4 = theBoard[nextPosition[6]][nextPosition[7]];
 	
-	temp1.addNeighbour(temp2);
-	temp1.addNeighbour(temp3);
-	temp1.addNeighbour(temp4);
+	temp1.addNeighbour(&temp2);
+	temp1.addNeighbour(&temp3);
+	temp1.addNeighbour(&temp4);
 	
-	temp2.addNeighbour(temp1);
-	temp2.addNeighbour(temp3);
-	temp2.addNeighbour(temp4);
+	temp2.addNeighbour(&temp1);
+	temp2.addNeighbour(&temp3);
+	temp2.addNeighbour(&temp4);
 	
-	temp3.addNeighbour(temp1);
-	temp3.addNeighbour(temp2);
-	temp3.addNeighbour(temp4);
+	temp3.addNeighbour(&temp1);
+	temp3.addNeighbour(&temp2);
+	temp3.addNeighbour(&temp4);
 	
-	temp4.addNeighbour(temp1);
-	temp4.addNeighbour(temp2);
-	temp4.addNeighbour(temp3);
+	temp4.addNeighbour(&temp1);
+	temp4.addNeighbour(&temp2);
+	temp4.addNeighbour(&temp3);
 	
 	
 	
 	current = next;
-	currentPosition = next.getPositions();
+	currentPosition = next->getPositions();
 	for(int i = 0; i < BLOCK_SIZE*2; i = i + 2){
 		if(theBoard[nextPosition[i]][nextPosition[i+1]].isOccupied()){
 			return false; // when this is false, the game should be OVER
@@ -279,6 +282,9 @@ bool Board::drop(){ // drops the current block and makes the next block the curr
 	
 	
 	// next = newBlock(); ??
+	
+	//temp
+	return true;
 }
 
 
@@ -298,9 +304,10 @@ Cell Board::getCell(int r, int c){
 
 void Board::restartGame(){
 	clearBoard();
-	gameStart();
+	gameStart(level);
 }
 
-ostream &Board::operator<<(ostream &out, Board b){
+ostream &operator<<(ostream &out, Board b){
 	// do the printings
+	return out;
 }

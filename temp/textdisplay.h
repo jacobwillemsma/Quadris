@@ -18,7 +18,6 @@ class TextDisplay {
   void notify(int r, int c, char ch); // notifies the TextDisplay of a possible change in char
   void displayUpdate(int lvl, int scr, int hs, char type); // updates variables in the display
   
-  void blockPrint(char type); // a rather brute force Block print.. should probably be cleaned up
 
   ~TextDisplay();
 

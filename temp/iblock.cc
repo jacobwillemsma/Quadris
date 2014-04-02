@@ -30,10 +30,10 @@ bool IBlock::clockwise(int r, int c){ // r and c not needed here
 }
 
 bool IBlock::counterclockwise(int r, int c){ // r and c not needed here
-	return clockwise(int r, int c);
+	return clockwise(r, c);
 }
 
-IBlock::IBlock(int lvl) : Block(lvl), type('I'){
+IBlock::IBlock(int lvl) : Block(lvl, 'I'){
 	positions = new int[8];
 	
 	positions[0] = 0;

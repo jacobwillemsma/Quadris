@@ -10,7 +10,7 @@
 #include "score.h"
 #include "block.h"
 #include "nextblock.h"
-#include "display.h"
+#include "textdisplay.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -26,9 +26,9 @@ int main(int argc, const char * argv[]) {
          string arg = argv[i];
          if (arg == "-text")
          	textOnly = true;
-         if (ar == "-scriptfile")
+         if (arg == "-scriptfile")
          	filename = argv[i + 1];
-         if (ar == "-startlevel")
+         if (arg == "-startlevel")
          {
             int num;
             stringstream ss(argv[i + 1]);
@@ -46,20 +46,22 @@ int main(int argc, const char * argv[]) {
 
     Interpreter *i = new Interpreter;
     if (textOnly)
-    	Board *b = new Board(...) // Initiated without the xWindow chunk.
+    	Board *b = new Board(); // Initiated without the xWindow chunk.
     else
-		Board *b = new Board(...); // initiated with xWindow.
-	string input;
+		Board *b = new Board(); // initiated with xWindow.
 	
+	
+	string input;
+	string command;
 	// Deal with the commands issued to the game.
 	// Need to somehow implement current block and next block seemlessly.  Because next block needs to be known here.
 	while (cin >> command) {
+		/*
 		if (input[0] >= 48 && input[0] <= 57) {
 			// We have a number before our command.
 			istringstream ss;
 			int i = 0;
 			int number;
-			string command;
 			while (input[i] >= 48 && input[i] <= 57) {
 				ss << input[i];
 				i++;
@@ -72,6 +74,6 @@ int main(int argc, const char * argv[]) {
 			i.processCommand(input, b);
 		}
 		// Print out the board every time.
-		cout << b;
+		cout << b;*/
 	}
 }
