@@ -1,4 +1,5 @@
 #include "block.h"
+#include <iostream>
 using namespace std;
 
 Block::Block(Board *b) {
@@ -18,7 +19,7 @@ Block::~Block(){
 
 bool Block::canShiftLeft(Board *b) {
 	for (int i = 0; i < 4; i++) {
-		if (positions[i].getX() == 0 || b->isOccupied(positions[i].getX(), positions[i].getY())) 
+		if (positions[i].getX() == 0 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/) 
 			return false;
 	}
 	return true;
@@ -26,20 +27,24 @@ bool Block::canShiftLeft(Board *b) {
 
 void Block::left(Board *b) {
 	if (canShiftLeft(b)) {
+		// Update the display
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), ' ');
+		}
 		// We can shift it left.  Effectuate the shift and print update the display.
-		for (int i = 4; i < 4; i++) {
-			positions[i].setX(positions[i].getX() - 1);
+		for (int i = 0; i < 4; i++) {
+			positions[i].addX(-1);
 		}
 		// Update the display
-		for (int i = 4; i < 4; i++) {
-			b->update(positions[i].getX(), positions[i].getY(), type);
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
 	}
 }
 
 bool Block::canShiftRight(Board *b) {
 	for (int i = 0; i < 4; i++) {
-		if (positions[i].getX() == 15 || b->isOccupied(positions[i].getX(), positions[i].getY()))
+		if (positions[i].getX() == 9 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/)
 			return false;
 	}
 	return true;
@@ -47,20 +52,24 @@ bool Block::canShiftRight(Board *b) {
 
 void Block::right(Board *b) {
 	if (canShiftRight(b)) {
+		// Update the display
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), ' ');
+		}
 		// We can shift it left.  Effectuate the shift and print update the display.
-		for (int i = 4; i < 4; i++) {
-			positions[i].setX(positions[i].getX() + 1);
+		for (int i = 0; i < 4; i++) {
+			positions[i].setX(positions[i].getX()+1);
 		}
 		// Update the display
-		for (int i = 4; i < 4; i++) {
-			b->update(positions[i].getX(), positions[i].getY(), type);
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
 	}
 }
 
 bool Block::canMoveDown(Board *b) {
 	for (int i = 0; i < 4; i++) {
-		if (positions[i].getY() == 18 || b->isOccupied(positions[i].getX(), positions[i].getY()))
+		if (positions[i].getY() == 17 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/)
 			return false;
 	}
 	return true;
@@ -68,12 +77,16 @@ bool Block::canMoveDown(Board *b) {
 
 void Block::down(Board *b) {
 	if (canMoveDown(b)) {
-		for (int i = 4; i < 4; i++) {
+		// Update the display
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), ' ');
+		}
+		for (int i = 0; i < 4; i++) {
 			positions[i].setY(positions[i].getY() + 1);
 		}
 		// Update the display
-		for (int i = 4; i < 4; i++) {
-			b->update(positions[i].getX(), positions[i].getY(), type);
+		for (int i = 0; i < 4; i++) {
+			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
 	}
 }

@@ -17,7 +17,7 @@ bool Interpreter::isRight(string command) {
 		return command == "rig";
 	else if (command.length() == 4)
 		return command == "righ";
-	else if (command.length() == 6)
+	else if (command.length() == 5)
 		return command == "right";
 	else
 		return false;
