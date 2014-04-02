@@ -11,6 +11,7 @@ Block::Block(Board *b) {
 		positions[i].setY(3);
 		b->update(3, i, type);
 	}
+	cout << *b;
 }
 
 Block::~Block(){

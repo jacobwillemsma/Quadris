@@ -11,9 +11,10 @@ class NextBlock {
 	std::ifstream blockSeq; // name of file to read from
   
   public:
-	NextBlock(int lvl);
-	void addLevel();
-	void subLevel();
+	NextBlock(int lvl, std::string fileName);
+	~NextBlock();
+	//void addLevel();
+	//void subLevel();
 	char getBlockType();
 };
 

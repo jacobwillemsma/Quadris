@@ -1,9 +1,8 @@
 #include "nextblock.h"
-#include <csstdlib> // used for rand function
+//#include <csstdlib> // used for rand function
 #include <fstream>
 #include <iostream>
 #include <sstream>
-
 using namespace std;
 
 
@@ -16,37 +15,37 @@ NextBlock::~NextBlock() {
 	blockSeq.close();
 }
 
-void NextBlock::addLevel(){
+/*void NextBlock::addLevel(){
 	++level;
 }
 
 void NextBlock::subLevel(){
 	--level;
-}
+}*/
 
 char NextBlock::getBlockType(){
 	int random;
-	if(level == 0){
+	/*if(level == 0){*/
 		string type;
 		if (blockSeq >> type) {
-            if(blockname == "S")
+            if(type == "S")
                 return 'S';
-            else if (blockname == "Z")
+            else if (type == "Z")
                 return 'Z';
-            else if (blockname == "T")
+            else if (type == "T")
                 return 'T';
-            else if(blockname == "L")
+            else if(type == "L")
                 return 'L';
-            else if(blockname == "O")
+            else if(type == "O")
                 return 'O';
-            else if(blockname == "I")
+            else if(type == "I")
                 return 'I';
             else
                 return 'J';
 		}
 		else
 			 return 'A'; // Signals that we hit EOF.
-	}
+	}/*
 	else if(level == 1){
 		random = rand() % 12;
 		
@@ -101,6 +100,6 @@ char NextBlock::getBlockType(){
 		else if(random == 7 || random == 8)
 			return 'S';
 	}
-}
+}*/
 
 
