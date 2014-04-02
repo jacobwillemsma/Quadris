@@ -13,6 +13,8 @@
 #include "display.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 int main(int argc, const char * argv[]) {
@@ -26,16 +28,16 @@ int main(int argc, const char * argv[]) {
          string arg = argv[i];
          if (arg == "-text")
          	textOnly = true;
-         if (ar == "-scriptfile")
+         if (arg == "-scriptfile")
          	filename = argv[i + 1];
-         if (ar == "-startlevel")
+         if (arg == "-startlevel")
          {
             int num;
             stringstream ss(argv[i + 1]);
             ss >> num;
             startlevel = num;
          }
-         /*if (ar == "-seed")
+         /*if (arg == "-seed")
          {
             int num;
             stringstream ss(argv[i + 1]);
@@ -46,7 +48,7 @@ int main(int argc, const char * argv[]) {
 
     Interpreter *i = new Interpreter;
     if (textOnly)
-    	Board *b = new Board(...) // Initiated without the xWindow chunk.
+    	Board *b = new Board(...); // Initiated without the xWindow chunk (or with it set to NULL)
     else
 		Board *b = new Board(...); // initiated with xWindow.
 	string input;
