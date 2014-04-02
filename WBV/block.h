@@ -11,19 +11,18 @@ class Block {
 	bool canShiftLeft(Board *b);
 	bool canShiftRight(Board *b);
 	bool canMoveDown(Board *b);
-	//canRotateClockwise(Coordinate c, Board *b);
-	//canRotateCounterClockwise(Coordinate c, Board *b);
+	bool canRotateClockwise(Board *b);
+	bool canRotateCounterClockwise(Board *b);
 	
   public:
-	Block(Board *b);
-	~Block();
+	virtual ~Block();
 	
 	void left(Board *b);
 	void right(Board *b);
 	void down(Board *b);
 	void drop(Board *b);
-	void clockwise(Board *b);
-	void counterclockwise(Board *b);
+	void clockwise(Board *b) = 0;
+	void counterclockwise(Board *b) = 0;
 	
 	int getLevel();
 	char getType();
