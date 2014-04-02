@@ -1,6 +1,7 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
+#include "nextblock.h"
 #include "cell.h"
 #include "iblock.h"
 #include "jblock.h"
