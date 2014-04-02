@@ -9,7 +9,7 @@ class Score {
 	int highScore;
   public:
 	Score();
-	~Score();
+	
 	int getScore();
 	int getHighScore();
 	void resetScore();

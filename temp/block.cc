@@ -66,3 +66,4 @@ void Block::setPositions(int * pos){
 }
 
 Block::Block(int lvl, char t) : positions(0), level(lvl), type(t){}
+Block::~Block(){}

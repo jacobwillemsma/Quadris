@@ -24,7 +24,7 @@ class Block{
 	void setPositions(int * pos); // sets the positions within the block
 	
 	Block(int lvl, char t);
-	virtual ~Block() = 0;
+	virtual ~Block()=0;
 };
 
 

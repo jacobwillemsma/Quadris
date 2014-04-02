@@ -45,7 +45,7 @@ IBlock::IBlock(int lvl) : Block(lvl, 'I'){
 	positions[6] = 0;
 	positions[7] = 3;
 }
-/*
+
 IBlock::~IBlock(){
 	delete [] positions;
-} */
+}
