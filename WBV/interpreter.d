@@ -1,2 +1,2 @@
-interpreter.o: interpreter.cc interpreter.h board.h cell.h textdisplay.h \
-  coordinate.h block.h
+interpreter.o: interpreter.cc interpreter.h block.h coordinate.h board.h \
+  cell.h textdisplay.h

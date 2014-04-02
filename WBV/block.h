@@ -22,6 +22,8 @@ class Block {
 	void right(Board *b);
 	void down(Board *b);
 	void drop(Board *b);
+	void clockwise(Board *b);
+	void counterclockwise(Board *b);
 	
 	int getLevel();
 	char getType();
