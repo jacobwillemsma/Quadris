@@ -2,10 +2,13 @@
 #define __NEXTBLOCK_H__
 
 #include <string>
+#include <iostream>
+#include <fstream>
 
 class NextBlock {
 	int level;
-	const std::string FILE_NAME = "sequence.txt"; // name of file to read from
+	std::string FILE_NAME;
+	std::ifstream blockSeq; // name of file to read from
   
   public:
 	NextBlock(int lvl);

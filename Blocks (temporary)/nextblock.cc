@@ -1,10 +1,20 @@
 #include "nextblock.h"
 #include <csstdlib> // used for rand function
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
 
-NextBlock::NextBlock(int lvl) : level(lvl){}
+NextBlock::NextBlock(int lvl, string fileName) : level(lvl), FILE_NAME(fileName) {
+	// open the input file.
+	blockSeq.open(FILE_NAME.c_str());
+}
+
+NextBlock::~NextBlock() {
+	blockSeq.close();
+}
 
 void NextBlock::addLevel(){
 	++level;
@@ -17,7 +27,25 @@ void NextBlock::subLevel(){
 char NextBlock::getBlockType(){
 	int random;
 	if(level == 0){
-		// read from file "sequence.txt"
+		string type;
+		if (blockSeq >> type) {
+            if(blockname == "S")
+                return 'S';
+            else if (blockname == "Z")
+                return 'Z';
+            else if (blockname == "T")
+                return 'T';
+            else if(blockname == "L")
+                return 'L';
+            else if(blockname == "O")
+                return 'O';
+            else if(blockname == "I")
+                return 'I';
+            else
+                return 'J';
+		}
+		else
+			 return 'A'; // Signals that we hit EOF.
 	}
 	else if(level == 1){
 		random = rand() % 12;

@@ -50,6 +50,8 @@ int main(int argc, const char * argv[]) {
     else
 		Board *b = new Board(...); // initiated with xWindow.
 	string input;
+	NextBlock *nblock = new NextBlock(startlevel, filename);
+	Block *b = new Block() 
 	
 	// Deal with the commands issued to the game.
 	// Need to somehow implement current block and next block seemlessly.  Because next block needs to be known here.
