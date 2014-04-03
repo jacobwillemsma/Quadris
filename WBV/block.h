@@ -9,12 +9,6 @@ protected:
 	int level;
 	char type;
 	Coordinate *positions;
-	Coordinate *rightPositions;
-	Coordinate *leftPositions;
-	Coordinate *downPositions;
-	int leftNum;
-	int rightNum;
-	int downNum;
 
 	bool canShiftLeft(Board *b);
 	bool canShiftRight(Board *b);
@@ -36,7 +30,6 @@ public:
 	
 	virtual void clockwise(Board *b) = 0;
 	virtual void counterclockwise(Board *b) = 0;
-	virtual void updatePositions() = 0;
 };
 
 #endif

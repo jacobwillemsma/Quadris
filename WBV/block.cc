@@ -4,35 +4,30 @@ using namespace std;
 Block::Block() {}
 Block::~Block(){
 	delete [] positions;
-	delete [] rightPositions;
-	delete [] leftPositions;
-	delete [] downPositions;
 }
 
 // ALL OF THE "CAN" FUNCTIONS NEED TO BE FIXED.
 
 bool Block::canShiftLeft(Board *b) {
-	for (int i = 0; i < leftNum; i++) {
-		if (leftPositions[i].getX() == 0 || b->isOccupied((leftPositions[i].getX() - 1), leftPositions[i].getY())) 
+	for (int i = 0; i < 4; i++) {
+		if (positions[i].getX() == 0 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/) 
 			return false;
 	}
 	return true;
 }
 
 bool Block::canShiftRight(Board *b) {
-
-	for (int i = 0; i < rightNum; i++) {
-		cout << "Checking location (" << rightPositions[i].getY() + 1 << "," << rightPositions[i].getX() << ") and it is " << b->isOccupied((rightPositions[i].getY() + 1), rightPositions[i].getX()) << " occupied." << endl;
-		if (rightPositions[i].getX() == 9 || b->isOccupied((rightPositions[i].getX() + 1), rightPositions[i].getY())) 
+	Coordinate *temp = new Coordinate[4];
+	for (int i = 0; i < 4; i++) {
+		if (positions[i].getX() == 9 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/) 
 			return false;
 	}
 	return true;
 }
 
 bool Block::canMoveDown(Board *b) {
-	for (int i = 0; i < downNum; i++) {
-		//cout << "Checking location (" << downPositions[i].getY() + 1 << "," << downPositions[i].getX() << ") and it is " << b->isOccupied((downPositions[i].getY() + 1), downPositions[i].getX()) << " occupied." << endl;
-		if (downPositions[i].getY() == 17 || b->isOccupied((downPositions[i].getY() + 1), downPositions[i].getX()))
+	for (int i = 0; i < 4; i++) {
+		if (positions[i].getY() == 17 /*|| b->isOccupied((positions[i].getY() + 1), positions[i].getX())*/)
 			return false;
 	}
 	return true;
@@ -60,7 +55,6 @@ void Block::left(Board *b) {
 		for (int i = 0; i < 4; i++) {
 			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
-		updatePositions();
 	}
 }
 
@@ -78,13 +72,7 @@ void Block::right(Board *b) {
 		for (int i = 0; i < 4; i++) {
 			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
-		updatePositions();
 	}
-	cout << "rightPositions contains ";
-		for (int i = 0; i < rightNum; i++) {
-			cout << "(" << rightPositions[i].getX() << "," << rightPositions[i].getY() << ") ";
-		}
-		cout << endl;
 }
 
 
@@ -102,14 +90,12 @@ void Block::down(Board *b) {
 		for (int i = 0; i < 4; i++) {
 			b->update(positions[i].getY(), positions[i].getX(), type);
 		}
-		updatePositions();
 	}
 }
 
 void Block::drop(Board *b) {
 	while (canMoveDown(b)) {
 		down(b);
-		updatePositions();
 	}
 }
 

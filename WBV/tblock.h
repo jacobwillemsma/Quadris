@@ -5,15 +5,12 @@
 
 class TBlock : public Block {
 	int config; // marks the current configuration of the Block
-
-
   public:
 	TBlock(Board *b);
 	~TBlock();
 	
 	void clockwise(Board *b);
 	void counterclockwise(Board *b);
-	void updatePositions();
 	
 	void configOne(int r, int c);
 	void configTwo(int r, int c);

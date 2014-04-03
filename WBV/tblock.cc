@@ -18,30 +18,6 @@ TBlock::TBlock(Board *b) {
 	positions[3].setX(2);
 	positions[3].setY(3);
 
-	rightPositions = new Coordinate[2];
-	leftPositions = new Coordinate[2];
-	downPositions = new Coordinate[3];
-
-	int rightNum = 2;
-	int leftNum = 2;
-	int downNum = 3;
-
-	rightPositions[0] = positions[2];
-	rightPositions[1] = positions[3];
-
-	leftPositions[0] = positions[0];
-	leftPositions[1] = positions[2];
-
-	downPositions[0] = positions[0];
-	downPositions[1] = positions[2];
-	downPositions[2] = positions[3];
-
-	cout << "rightPositions contains ";
-	for (int i = 0; i < rightNum; i++) {
-			cout << "(" << rightPositions[i].getX() << "," << rightPositions[i].getY() << ") ";
-	}
-	cout << endl;
-
 	// Let the cells and the display know that they are present.
 	for (int i = 0; i < 4; i++) {
 		b->update(positions[i].getY(), positions[i].getX(), type);
@@ -50,9 +26,6 @@ TBlock::TBlock(Board *b) {
 
 TBlock::~TBlock() {
 	delete [] positions;
-	delete [] rightPositions;
-	delete [] leftPositions;
-	delete [] downPositions;
 }
 
 void TBlock::clockwise(Board *b){ // r and c not needed here
@@ -122,8 +95,6 @@ void TBlock::configOne(int r, int c){
 	positions[2].setX(c+1);
 	positions[3].setY(r-1);
 	positions[3].setX(c+2);
-
-	updatePositions();
 }
 
 void TBlock::configTwo(int r, int c){
@@ -135,8 +106,6 @@ void TBlock::configTwo(int r, int c){
 	positions[2].setX(c+1);
 	positions[3].setY(r);
 	positions[3].setX(c+1);
-
-	updatePositions();
 }
 
 void TBlock::configThree(int r, int c){
@@ -147,9 +116,7 @@ void TBlock::configThree(int r, int c){
 	positions[2].setY(r);
 	positions[2].setX(c+1);
 	positions[3].setY(r);
-	positions[3].setX(c+2); 
-
-	updatePositions();
+	positions[3].setX(c+2);
 }
 
 void TBlock::configFour(int r, int c){
@@ -161,96 +128,4 @@ void TBlock::configFour(int r, int c){
 	positions[2].setX(c);
 	positions[3].setY(r-1);
 	positions[3].setX(c+1);
-
-	updatePositions();
-}
-
-
-void TBlock::updatePositions() {
-	cout << "Config is " << config << endl;
-	delete [] rightPositions;
-	delete [] leftPositions;
-	delete [] downPositions;
-
-	if (config == 1) {
-		rightPositions = new Coordinate[2];
-		leftPositions = new Coordinate[2];
-		downPositions = new Coordinate[3];
-
-		rightPositions[0] = positions[2];
-		rightPositions[1] = positions[3];
-
-		leftPositions[0] = positions[0];
-		leftPositions[1] = positions[2];
-
-		downPositions[0] = positions[0];
-		downPositions[1] = positions[2];
-		downPositions[2] = positions[3];
-
-		rightNum = 2;
-		leftNum = 2;
-		downNum = 3;
-	}
-
-	else if (config == 2) {
-		rightPositions = new Coordinate[3];
-		leftPositions = new Coordinate[3];
-		downPositions = new Coordinate[2];
-
-		rightPositions[0] = positions[1];
-		rightPositions[1] = positions[2];
-		rightPositions[2] = positions[3];
-
-		leftPositions[0] = positions[0];
-		leftPositions[1] = positions[1];
-		leftPositions[2] = positions[3];
-
-		downPositions[0] = positions[0];
-		downPositions[1] = positions[3];
-
-		rightNum = 3;
-		leftNum = 3;
-		downNum = 2;
-	}
-
-	else if (config == 3) {
-		rightPositions = new Coordinate[2];
-		leftPositions = new Coordinate[2];
-		downPositions = new Coordinate[3];
-
-		rightPositions[0] = positions[1];
-		rightPositions[1] = positions[3];
-
-		leftPositions[0] = positions[0];
-		leftPositions[1] = positions[1];
-
-		downPositions[0] = positions[0];
-		downPositions[1] = positions[2];
-		downPositions[2] = positions[3];
-
-		rightNum = 2;
-		leftNum = 2;
-		downNum = 3;
-	}
-
-	else {
-		rightPositions = new Coordinate[3];
-		leftPositions = new Coordinate[3];
-		downPositions = new Coordinate[2];
-
-		rightPositions[0] = positions[0];
-		rightPositions[1] = positions[2];
-		rightPositions[2] = positions[3];
-
-		leftPositions[0] = positions[0];
-		leftPositions[1] = positions[1];
-		leftPositions[2] = positions[2];
-
-		downPositions[0] = positions[2];
-		downPositions[1] = positions[3];
-
-		rightNum = 3;
-		leftNum = 3;
-		downNum = 2;
-	}
 }
