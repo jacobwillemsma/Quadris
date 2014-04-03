@@ -36,12 +36,6 @@ TBlock::TBlock(Board *b) {
 	downPositions[1] = positions[2];
 	downPositions[2] = positions[3];
 
-	cout << "rightPositions contains ";
-	for (int i = 0; i < rightNum; i++) {
-			cout << "(" << rightPositions[i].getX() << "," << rightPositions[i].getY() << ") ";
-	}
-	cout << endl;
-
 	// Let the cells and the display know that they are present.
 	for (int i = 0; i < 4; i++) {
 		b->update(positions[i].getY(), positions[i].getX(), type);
@@ -59,23 +53,26 @@ void TBlock::clockwise(Board *b){ // r and c not needed here
 	// Update the display
 	for (int i = 0; i < 4; i++) {
 		b->update(positions[i].getY(), positions[i].getX(), ' ');
-	}
-	
+	}	
 	if(config == 1){
 		configTwo(positions[0].getY()+1, positions[0].getX());
 		config = 2;
+		updatePositions();
 	}
 	else if(config == 2){
 		configThree(positions[0].getY()+1, positions[0].getX());
 		config = 3;
+		updatePositions();
 	}
 	else if(config == 3){
 		configFour(positions[0].getY(), positions[0].getX());
 		config = 4;
+		updatePositions();
 	}
 	else if(config == 4){
 		configOne(positions[2].getY(), positions[2].getX());
 		config = 1;
+		updatePositions();
 	}
 	
 	// Update the display
@@ -93,18 +90,22 @@ void TBlock::counterclockwise(Board *b){ // r and c not needed here
 	if(config == 1){
 		configFour(positions[0].getY()+1, positions[0].getX());
 		config = 4;
+		updatePositions();
 	}
 	else if(config == 2){
 		configOne(positions[0].getY()+1, positions[0].getX());
 		config = 1;
+		updatePositions();
 	}
 	else if(config == 3){
 		configTwo(positions[0].getY(), positions[0].getX());
 		config = 2;
+		updatePositions();
 	}
 	else if(config == 4){
 		configThree(positions[2].getY(), positions[2].getX());
 		config = 3;
+		updatePositions();
 	}
 	
 	// Update the display
@@ -122,8 +123,6 @@ void TBlock::configOne(int r, int c){
 	positions[2].setX(c+1);
 	positions[3].setY(r-1);
 	positions[3].setX(c+2);
-
-	updatePositions();
 }
 
 void TBlock::configTwo(int r, int c){
@@ -135,8 +134,6 @@ void TBlock::configTwo(int r, int c){
 	positions[2].setX(c+1);
 	positions[3].setY(r);
 	positions[3].setX(c+1);
-
-	updatePositions();
 }
 
 void TBlock::configThree(int r, int c){
@@ -148,8 +145,6 @@ void TBlock::configThree(int r, int c){
 	positions[2].setX(c+1);
 	positions[3].setY(r);
 	positions[3].setX(c+2); 
-
-	updatePositions();
 }
 
 void TBlock::configFour(int r, int c){
@@ -161,13 +156,10 @@ void TBlock::configFour(int r, int c){
 	positions[2].setX(c);
 	positions[3].setY(r-1);
 	positions[3].setX(c+1);
-
-	updatePositions();
 }
 
 
 void TBlock::updatePositions() {
-	cout << "Config is " << config << endl;
 	delete [] rightPositions;
 	delete [] leftPositions;
 	delete [] downPositions;

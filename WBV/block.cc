@@ -13,7 +13,7 @@ Block::~Block(){
 
 bool Block::canShiftLeft(Board *b) {
 	for (int i = 0; i < leftNum; i++) {
-		if (leftPositions[i].getX() == 0 || b->isOccupied((leftPositions[i].getX() - 1), leftPositions[i].getY())) 
+		if (leftPositions[i].getX() == 0 || b->isOccupied(leftPositions[i].getY(), (leftPositions[i].getX() - 1))) 
 			return false;
 	}
 	return true;
@@ -22,8 +22,8 @@ bool Block::canShiftLeft(Board *b) {
 bool Block::canShiftRight(Board *b) {
 
 	for (int i = 0; i < rightNum; i++) {
-		cout << "Checking location (" << rightPositions[i].getY() + 1 << "," << rightPositions[i].getX() << ") and it is " << b->isOccupied((rightPositions[i].getY() + 1), rightPositions[i].getX()) << " occupied." << endl;
-		if (rightPositions[i].getX() == 9 || b->isOccupied((rightPositions[i].getX() + 1), rightPositions[i].getY())) 
+		//cout << "Checking location (" << rightPositions[i].getY() + 1 << "," << rightPositions[i].getX() << ") and it is " << b->isOccupied((rightPositions[i].getY() + 1), rightPositions[i].getX()) << " occupied." << endl;
+		if (rightPositions[i].getX() == 9 || b->isOccupied(rightPositions[i].getY(), (rightPositions[i].getX() + 1))) 
 			return false;
 	}
 	return true;
@@ -80,11 +80,6 @@ void Block::right(Board *b) {
 		}
 		updatePositions();
 	}
-	cout << "rightPositions contains ";
-		for (int i = 0; i < rightNum; i++) {
-			cout << "(" << rightPositions[i].getX() << "," << rightPositions[i].getY() << ") ";
-		}
-		cout << endl;
 }
 
 
@@ -104,6 +99,11 @@ void Block::down(Board *b) {
 		}
 		updatePositions();
 	}
+	cout << "downPositions contains ";
+		for (int i = 0; i < downNum; i++) {
+			cout << "(" << downPositions[i].getX() << "," << downPositions[i].getY() << ") ";
+		}
+		cout << endl;
 }
 
 void Block::drop(Board *b) {
