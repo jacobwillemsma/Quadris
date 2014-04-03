@@ -2,6 +2,7 @@
 #include "block.h"
 #include "iblock.h"
 #include "jblock.h"
+#include "lblock.h"
 #include "interpreter.h"
 #include "textdisplay.h"
 #include "board.h"
@@ -35,7 +36,7 @@ int main(int argc, const char * argv[]) {
         Block *blo = new Block(b);
     else if (blockname == 'J')
     	Block *blo = new jBlock(b);	*/
-    Block *currentBlock = new JBlock(b);
+    Block *currentBlock = new LBlock(b);
 	cout << *b;
 	string command;
 	while (cin >> command) {
