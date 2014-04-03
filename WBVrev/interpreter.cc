@@ -175,6 +175,21 @@ bool Interpreter::processCommand(string command, Block *blo, Board *b) {
 			blo->counterclockwise(b);
 			return true;
 		}
+		else if (isLevelUp(command)) {
+			// Drops the block
+			//level UP
+			return true;
+		}
+		else if (isLevelDown(command)) {
+			// Drops the block
+			// level DOWN
+			return true;
+		}
+		else if (isRestart(command)) {
+			// Drops the block
+			// RESTART!
+			return true;
+		}
 		else 
 			return false;
 	}

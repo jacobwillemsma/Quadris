@@ -1,7 +1,5 @@
 #include "cell.h"
 
-using namespace std;
-
 Cell::Cell() : r(-1), c(-1), symbol(' '), occupied(false) {}
 
 bool Cell::isOccupied(){
