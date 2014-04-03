@@ -129,3 +129,5 @@ void JBlock::configFour(int r, int c){
 	positions[3].setY(r);
 	positions[3].setX(c+1);
 }
+
+void JBlock::updatePositions() {}
