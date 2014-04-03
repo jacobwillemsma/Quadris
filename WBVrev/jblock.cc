@@ -3,8 +3,8 @@
 
 using namespace std;
 
-JBlock::JBlock(Board *b) {
-	level = 0;
+JBlock::JBlock(Board *b, int level) {
+	level = level;
 	type = 'J';
 	positions = new Coordinate[4];
 	config = 1;

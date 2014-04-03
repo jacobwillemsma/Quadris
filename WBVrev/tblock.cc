@@ -3,8 +3,8 @@
 
 using namespace std;
 
-TBlock::TBlock(Board *b) {
-	level = 0;
+TBlock::TBlock(Board *b, int level) {
+	level = level;
 	type = 'T';
 	positions = new Coordinate[4];
 	config = 1;

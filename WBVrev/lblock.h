@@ -6,7 +6,7 @@
 class LBlock : public Block {
 	int config; // marks the current configuration of the Block
 public:
-	LBlock(Board *b);
+	LBlock(Board *b, int level);
 	~LBlock();
 
 	void clockwise(Board *b);

@@ -41,15 +41,16 @@ ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct 
 	cout << "Score: " << td.score << endl;
 	cout << "Hiscore: " << td.hiScore << endl;
 	
-	cout << "----------" << endl;
+	cout << "____________" << endl;
 	// prints the entire Board 
 	for(int i = 0; i < td.rows; ++i){
+		cout << "|";
 		for(int j = 0; j < td.cols; ++j){
 			out << td.theDisplay[i][j];
 		}
-		cout << endl;
+		cout << "|" << endl;
 	}
-	cout << "----------" << endl;
+	cout << "¯¯¯¯¯¯¯¯¯¯¯¯" << endl;
 	cout << "Next:" << endl;
 	
 	char next = td.next;
@@ -63,24 +64,25 @@ ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct 
 	}
 	else if(next == 'L'){
 		cout << "  L" << endl;
-		cout << "LLL" << endl;
+		cout << "LLL";
 	}
 	else if(next == 'O'){
 		cout << "OO" << endl;
-		cout << "OO" << endl;
+		cout << "OO";
 	}
 	else if(next == 'S'){
 		cout << " SS" << endl;
-		cout << "SS" << endl;
+		cout << "SS";
 	}
 	else if(next == 'T'){
 		cout << "TTT" << endl;
-		cout << " T" << endl;
+		cout << " T";
 	}
 	else if(next == 'Z'){
 		cout << "ZZ" << endl;
-		cout << " ZZ" << endl;
+		cout << " ZZ";
 	}
+	cout << endl;
 	
 	return out;
 }

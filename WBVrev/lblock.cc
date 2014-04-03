@@ -3,8 +3,8 @@
 
 using namespace std;
 
-LBlock::LBlock(Board *b) {
-	level = 0;
+LBlock::LBlock(Board *b, int level) {
+	level = level;
 	type = 'L';
 	positions = new Coordinate[4];
 	config = 1;

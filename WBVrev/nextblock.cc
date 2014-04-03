@@ -1,5 +1,5 @@
 #include "nextblock.h"
-//#include <csstdlib> // used for rand function
+#include <cstdlib> // used for rand function
 #include <fstream>
 #include <iostream>
 #include <sstream>

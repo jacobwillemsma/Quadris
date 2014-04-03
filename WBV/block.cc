@@ -99,11 +99,6 @@ void Block::down(Board *b) {
 		}
 		updatePositions();
 	}
-	cout << "downPositions contains ";
-		for (int i = 0; i < downNum; i++) {
-			cout << "(" << downPositions[i].getX() << "," << downPositions[i].getY() << ") ";
-		}
-		cout << endl;
 }
 
 void Block::drop(Board *b) {

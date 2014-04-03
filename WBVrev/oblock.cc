@@ -3,8 +3,8 @@
 
 using namespace std;
 
-OBlock::OBlock(Board *b) {
-	level = 0;
+OBlock::OBlock(Board *b, int level) {
+	level = level;
 	type = 'O';
 	positions = new Coordinate[4];
 	

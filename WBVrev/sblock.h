@@ -6,7 +6,7 @@
 class SBlock : public Block {
 	int config; // marks the current configuration of the Block
   public:
-	SBlock(Board *b);
+	SBlock(Board *b, int level);
 	~SBlock();
 	
 	void clockwise(Board *b);
