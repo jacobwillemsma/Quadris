@@ -1,11 +1,7 @@
 CXX = g++ -g
 CXXFLAGS = -Wall -MMD -L/usr/X11R6/lib -lX11
 EXEC = quadris
-<<<<<<< HEAD
-OBJECTS = main.o cell.o board.o textdisplay.o block.o coordinate.o interpreter.o lblock.o
-=======
 OBJECTS = main.o cell.o board.o textdisplay.o block.o coordinate.o interpreter.o iblock.o jblock.o tblock.o
->>>>>>> FETCH_HEAD
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
