@@ -3,12 +3,14 @@
 
 using namespace std;
 
-IBlock::IBlock(Board *b) : level(0), type('I'){
+IBlock::IBlock(Board *b) {
+	level = 0;
+	type = 'I';
 	positions = new Coordinate[4];
 	for (int i = 0; i < 4; i++) {
 		positions[i].setX(i);
 		positions[i].setY(3);
-		b->update(position[i].getY(), positions[i].getX(), type);
+		b->update(positions[i].getY(), positions[i].getX(), type);
 	}
 	cout << *b;
 }

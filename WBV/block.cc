@@ -1,6 +1,7 @@
 #include "block.h"
 using namespace std;
 
+Block::Block() {}
 Block::~Block(){
 	delete [] positions;
 }
@@ -16,11 +17,12 @@ bool Block::canShiftLeft(Board *b) {
 }
 
 bool Block::canShiftRight(Board *b) {
-	Coordinate temp = new Coordinate[4];
+	Coordinate *temp = new Coordinate[4];
 	for (int i = 0; i < 4; i++) {
-		if (positions[i].getX() == 17 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/) 
+		if (positions[i].getX() == 9 /*|| b->isOccupied(positions[i].getX(), positions[i].getY())*/) 
 			return false;
 	}
+	return true;
 }
 
 bool Block::canMoveDown(Board *b) {
@@ -35,7 +37,7 @@ bool Block::canRotateClockwise(Board *b) {
 	return true;
 }
 
-bool Block::canRotateCounterClockwise(Board *b); {
+bool Block::canRotateCounterClockwise(Board *b) {
 	return true;
 }
 

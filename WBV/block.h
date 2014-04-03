@@ -4,6 +4,8 @@
 #include "board.h"
 
 class Block {
+
+protected:
 	int level;
 	char type;
 	Coordinate *positions;
@@ -14,7 +16,8 @@ class Block {
 	bool canRotateClockwise(Board *b);
 	bool canRotateCounterClockwise(Board *b);
 	
-  public:
+public:
+	Block();
 	virtual ~Block();
 	
 	void left(Board *b);
