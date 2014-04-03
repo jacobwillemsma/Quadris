@@ -8,15 +8,18 @@ IBlock::IBlock(Board *b) {
 	type = 'I';
 	positions = new Coordinate[4];
 	
+	for (int i = 0; i < 4; ++i) {
+		positions[i].setX(i);
+		positions[i].setY(3);
+	}
+	
 	gameOver = false;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; ++i) {
 		if (b->isOccupied(positions[i].getY(), positions[i].getX()))
 			gameOver = true;
 	}
 	
-	for (int i = 0; i < 4; i++) {
-		positions[i].setX(i);
-		positions[i].setY(3);
+	for(int i = 0; i < 4; ++i){
 		b->update(positions[i].getY(), positions[i].getX(), type);
 	}
 }

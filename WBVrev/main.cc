@@ -57,10 +57,10 @@ int main(int argc, const char * argv[]) {
 			//cout << "blockname has value " << blockname << endl;
 			currentBlock = getNewBlock(newB, b);
 			
-			/*if (currentBlock->isGameOver()){
+			if (currentBlock->isGameOver()){
 				cout << "GAME OVER" << endl;
 				break;
-			}*/
+			}
 			    
 			cout << *b;
 		}
