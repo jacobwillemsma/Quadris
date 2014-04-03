@@ -17,7 +17,6 @@ bool Block::canShiftLeft(Board *b) {
 }
 
 bool Block::canShiftRight(Board *b) {
-	Coordinate *temp = new Coordinate[4];
 	for (int i = 0; i < 4; i++) {
 		if (positions[i].getX() == 9 || b->isOccupied(positions[i].getY(), positions[i].getX() + 1)) 
 			return false;

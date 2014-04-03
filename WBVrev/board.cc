@@ -24,6 +24,34 @@ void Board::update(int r, int c, char type) {
 	td->notify(r, c, type);
 }
 
+void Board::rowsChecker(){
+	for(int i = 0; i < BOARD_HEIGHT; ++i){
+		if(rowFull(i))
+			removeRow(i);
+	}
+}
+
+bool Board::rowFull(int r){
+	for(int i = 0; i < BOARD_WIDTH; ++i){
+		if(!isOccupied(r, i)) return false;
+	}
+	return true;
+}
+
+void Board::removeRow(int r){
+	for(int i = r; i > 1; --i){
+		for(int j = 0; j < BOARD_WIDTH; ++j){
+			theBoard[i][j].setSymbol(theBoard[i-1][j].getSymbol());
+			td->notify(i, j, theBoard[i-1][j].getSymbol());
+		}
+	}
+}
+
+
+void Board::updateDisplay(int lvl, int scr, int hiscr, char next){
+	td->update(lvl, scr, hiscr, next);
+}
+
 ostream &operator<<(ostream &out, const Board &b) {
 	out << *(b.td) << endl;
 	return out;

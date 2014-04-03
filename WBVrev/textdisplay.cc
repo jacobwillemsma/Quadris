@@ -1,7 +1,7 @@
 #include "textdisplay.h"
 using namespace std;
 
-TextDisplay::TextDisplay(int r, int c) : rows(r), cols(c){
+TextDisplay::TextDisplay(int r, int c) : rows(r), cols(c), level(0), score(0), hiScore(0){
 	// creates a new array of chars
 	theDisplay = new char*[r];
 	
@@ -29,7 +29,18 @@ TextDisplay::~TextDisplay(){
 	delete [] theDisplay;
 }
 
+void TextDisplay::update(int lvl, int scr, int hiscr, char type){
+	level = lvl;
+	score = scr;
+	hiScore = hiscr;
+	next = type;
+}
+
 ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct positioning for scores and such later
+	cout << "Level: " << td.level << endl;
+	cout << "Score: " << td.score << endl;
+	cout << "Hiscore: " << td.hiScore << endl;
+	
 	cout << "----------" << endl;
 	// prints the entire Board 
 	for(int i = 0; i < td.rows; ++i){
@@ -39,6 +50,37 @@ ostream &operator<<(ostream &out, const TextDisplay &td){ // need to do correct 
 		cout << endl;
 	}
 	cout << "----------" << endl;
-		
+	cout << "Next:" << endl;
+	
+	char next = td.next;
+	
+	if(next == 'I'){
+		cout << "IIII";
+	}
+	else if(next == 'J'){
+		cout << "J" << endl;
+		cout << "JJJ";
+	}
+	else if(next == 'L'){
+		cout << "  L" << endl;
+		cout << "LLL" << endl;
+	}
+	else if(next == 'O'){
+		cout << "OO" << endl;
+		cout << "OO" << endl;
+	}
+	else if(next == 'S'){
+		cout << " SS" << endl;
+		cout << "SS" << endl;
+	}
+	else if(next == 'T'){
+		cout << "TTT" << endl;
+		cout << " T" << endl;
+	}
+	else if(next == 'Z'){
+		cout << "ZZ" << endl;
+		cout << " ZZ" << endl;
+	}
+	
 	return out;
 }

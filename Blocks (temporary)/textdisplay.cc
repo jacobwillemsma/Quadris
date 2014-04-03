@@ -30,10 +30,8 @@ void displayUpdate(int lvl, int scr, int hs, char type){
 	level = lvl;
 	score = scr;
 	hiScore = hs;
-	nextType = type;	
+	nextType = type;
 }
-
-  void displayUpdate(); // updates variables in the display
 
 void TextDisplay::blockPrint(){
 	if(nextType == 'I'){

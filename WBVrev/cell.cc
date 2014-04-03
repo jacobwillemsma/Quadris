@@ -15,6 +15,10 @@ void Cell::setSymbol(char newSymbol) {
 	else occupied = false;
 }
 
+char Cell::getSymbol(){
+	return symbol;
+}
+
 void Cell::init(int r, int c) {
 	this->r = r;
 	this->c = c;

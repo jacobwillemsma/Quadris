@@ -102,6 +102,7 @@ char NextBlock::getBlockType(){
 		else if(random == 7 || random == 8)
 			return 'S';
 	}
+	return 0;
 }
 
 

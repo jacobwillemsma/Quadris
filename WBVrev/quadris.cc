@@ -19,9 +19,7 @@
 #include <sstream>
 using namespace std;
 
-Block * getNewBlock(NextBlock *newB, Board *b){
-	char blockname = newB->getBlockType();
-
+Block * getNewBlock(char blockname, Board *b){
 	if(blockname == 'S')
 		return new SBlock(b);
 	else if (blockname == 'Z')
@@ -46,8 +44,10 @@ int main(int argc, const char * argv[]) {
 	NextBlock *newB = new NextBlock(level, filename);
 	Board *b = new Board();
 	Interpreter *i = new Interpreter();
-    Block *currentBlock = getNewBlock(newB, b);
+    Block *currentBlock = getNewBlock(newB->getBlockType(), b);
+    char nextBlock = newB->getBlockType();
     
+	b->updateDisplay(level, 100, 100, nextBlock);
 	cout << *b;
 	string command;
 	while (cin >> command) {
@@ -55,19 +55,24 @@ int main(int argc, const char * argv[]) {
 			i->processCommand(command, currentBlock, b);
 			//char blockname = nb->getBlockType();
 			//cout << "blockname has value " << blockname << endl;
-			currentBlock = getNewBlock(newB, b);
+			b->rowsChecker(); // check if the drop caused any rows to be filled
+			
+			currentBlock = getNewBlock(nextBlock, b);
+			nextBlock = newB->getBlockType();
 			
 			if (currentBlock->isGameOver()){
 				cout << "GAME OVER" << endl;
 				break;
 			}
-			    
+			
+			b->updateDisplay(level, 100, 100, nextBlock);
 			cout << *b;
 		}
 		else {
 		i->processCommand(command, currentBlock, b);
 		// Print out the board every time.
-		cout << *b;
+			b->updateDisplay(level, 100, 100, nextBlock);
+			cout << *b;
 		}
 	}
 }
