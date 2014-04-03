@@ -55,16 +55,16 @@ void LBlock::counterclockwise(Board *b){ // r and c not needed here
 	}
 	
 	if(config == 1){
-		configTwo(positions[0].getY(), positions[0].getX());
+		configFour(positions[0].getY(), positions[0].getX());
 	}
 	else if(config == 2){
-		configThree(positions[2].getY(), positions[2].getX());
+		configOne(positions[2].getY(), positions[2].getX());
 	}
 	else if(config == 3){
-		configFour(positions[1].getY(), positions[1].getX());
+		configTwo(positions[1].getY(), positions[1].getX());
 	}
 	else if(config == 4){
-		configOne(positions[0].getY() + 2, positions[0].getX());
+		configThree(positions[0].getY() + 2, positions[0].getX());
 	}
 	
 	// Update the display
