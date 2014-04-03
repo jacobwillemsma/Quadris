@@ -6,9 +6,11 @@
 using namespace std;
 
 
-NextBlock::NextBlock(int lvl, string fileName) {
+NextBlock::NextBlock(int lvl, string fileName, int seed) {
+	randSeed = seed;
 	level = lvl;
 	FILE_NAME = fileName;
+	srand(randSeed);
 	// open the input file.
 	blockSeq.open(FILE_NAME.c_str());
 }
@@ -17,13 +19,13 @@ NextBlock::~NextBlock() {
 	blockSeq.close();
 }
 
-/*void NextBlock::addLevel(){
+void NextBlock::addLevel(){
 	++level;
 }
 
 void NextBlock::subLevel(){
 	--level;
-}*/
+}
 
 char NextBlock::getBlockType(){
 	int random;

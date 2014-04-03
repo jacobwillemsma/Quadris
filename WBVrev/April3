@@ -1,0 +1,186 @@
+class Vec {
+	int x, y;
+	int f();
+};
+
+size:8
+
+
+class Vec2 {
+	int x, y;
+	virtual int f();
+};
+
+size:16
+
+
+Book *pb = new Comic;
+pb->isItHeavy(); --> choice of which isItHeavy must be made at run-time
+
+
+For each class with virtual methods, the compiler creates a table of function pointers (the vtable)
+
+class C {
+	int x, y;
+	virtual void f();
+	virtual void g();
+	void h();
+	virtual ~C();
+};
+
+C objects have an extra pointer (the vptr) that points to C's vtable.
+
+Calling a virtual function:
+	- follow vptr to vtable
+	- fetch ptr to actual method from table
+	- follow the ptr and call the function
+Thus, virtual function calls incur a small overhead cost
+
+Also - declaring at least one virtual function adds a vptr to the object. Therefore, classes with no virtual methods are smaller than the same classes with virtual methods.
+
+Concretely, how should an object be laid out?
+Compiler-dependent.
+
+g++
+
+class A{
+	int a, c;
+	virtual void f();
+};
+
+vptr:
+a
+c
+
+
+class B : public A {
+	int b, d;
+};
+
+vptr:
+a
+c
+b
+d
+
+
+
+Multiple Inheritance:
+A class can inherit from more than one calss.
+
+class A { public: int a; };
+class B { public: int b; };
+class C : public A, public B {
+	void f(){
+		cout << a << b << endl;
+	}
+};
+
+
+Challenges:
+	B inherits from A
+	C inherits from A
+
+class D : public B, public C {
+  public:
+	int d;
+};
+
+
+D dObj;
+dObj.a; - which a is this?
+
+Need to specify:
+dObj.B::a or dObj.C::a
+
+But if B and C inherit from A, should there be one A part of D or two? (two is the default)
+
+- should B::A, C::A be the same or different?
+
+Make A a virtual base class, employ cirtual inheritance.
+
+class B : virtual public A { ... };
+class C : virtual public A { ... };
+
+g++:
+
+vptr <-- ptr to B, but not really
+B fields
+vptr <-- ptr to C or D
+C fields
+D fields
+vptr <-- ptr to A
+A fields
+
+Diagram doesn't look like A, B, C, D simultaneously, but slices of it do.
+
+Ptr assignment among A, B, C, D changes the address stored in the ptr.
+
+D *d;
+A *a = d; <-- changes the address
+
+
+static, dynamic, const will also change the value of the ptr.
+reinterpret-cast will not
+
+
+
+Return Value Optimization:
+
+class C {
+  public:
+	C() { cout << "Default" << endl; }
+	C(const C &other) {  cout << "copy ctor" << endl; }
+	C &operator=(const C &other) { cout << "operator=" << endl; }
+};
+
+C f() {
+	cout << "f running ... " << endl;
+	return C();
+}
+
+int main() {
+	C c = f();
+}
+
+Output?
+
+
+Conceptually:
+f calls the default ctor
+- copied to a temporary object in main's stack frame when f returns
+- then copied into c
+Thus 2 copy ctors and 1 defintion.
+
+When we run it - just the default ctor runs.
+Why - the temp objects are just for shuffling data around, otherwise unobservable.
+
+So the compiler is allowed to skip copy ctors and let f write its value directly into C.
+- Even if the copy ctor has side-effects
+- called Return Value Optimization (RVO)
+	- if you don't want this - fno-elide-constructors
+
+For operator=, this can't be done.
+	- can't just write into an existing object - old data needs to be destroyed!
+
+But if we can't escape copying temporaries, this can be expensiev. Can we get around it?
+
+In C++11 - Yes - with more ctors and rvalue refs.
+
+Assignment:
+x = f();
+lvalue "x"
+rvalue "f()"
+
+C++03 - refs must be lvalues
+
+An rvalue ref points at a temporary obj created by the compiler.
+X&& - rvalue ref to type X
+
+C &C::operator=(C&& other){
+	// instead of copying, swap the ptrs
+	std::swap(this->a, other.a);
+	return *this;
+	// other is temporary - will be destroyed anyway - this old data goes with it
+}
+	- copy and swap without the copy!

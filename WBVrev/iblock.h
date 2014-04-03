@@ -5,7 +5,7 @@
 
 class IBlock : public Block {
   public:
-	IBlock(Board *b, int level);
+	IBlock(Board *b, int lvl);
 	~IBlock();
 	
 	void clockwise(Board *b);

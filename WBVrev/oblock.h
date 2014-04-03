@@ -5,7 +5,7 @@
 
 class OBlock : public Block {
   public:
-	OBlock(Board *b, int level);
+	OBlock(Board *b, int lvl);
 	~OBlock();
 	
 	void clockwise(Board *b);

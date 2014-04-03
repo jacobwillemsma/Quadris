@@ -15,6 +15,23 @@ Board::Board(){
 	}
 }
 
+Board::~Board(){
+	for(int i = 0; i < BOARD_HEIGHT; ++i){
+		delete [] theBoard[i];
+	}
+	delete td;
+}
+
+void Board::clearBoard(){
+	// clears the Board by deleting all Cells
+	for(int i = 0; i < BOARD_HEIGHT; ++i){
+		for(int j = 0; j < BOARD_WIDTH; ++j){
+			theBoard[i][j].setSymbol(' ');
+			td->notify(i, j, ' ');
+		}
+	}
+}
+
 bool Board::isOccupied(int r, int c) {
 	return theBoard[r][c].isOccupied();
 }
@@ -24,11 +41,15 @@ void Board::update(int r, int c, char type) {
 	td->notify(r, c, type);
 }
 
-void Board::rowsChecker(){
+int Board::rowsChecker(){
+	int temp = 0;
 	for(int i = 0; i < BOARD_HEIGHT; ++i){
-		if(rowFull(i))
+		if(rowFull(i)){
+			++temp;
 			removeRow(i);
+		}
 	}
+	return temp;
 }
 
 bool Board::rowFull(int r){

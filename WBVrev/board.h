@@ -19,9 +19,11 @@ class Board {
 
   public:
 	Board();
+	~Board();
 	
+	void clearBoard();
 	void updateDisplay(int lvl, int scr, int hiscr, char next); // updates the display
-	void rowsChecker(); // checks if any rows are full
+	int rowsChecker(); // checks if any rows are full
 	void setCurrent(Coordinate *curr, char type);
 	void update(int r, int c, char type);
 	bool isOccupied(int r, int c); // checks if a Cell is occupied

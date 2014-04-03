@@ -12,13 +12,13 @@ class Interpreter {
 	bool isDown(std::string command);
 	bool isClockwise(std::string command);
 	bool isCounterClockwise(std::string command);
-	bool isRestart(std::string command);
 	bool isValid(std::string command);
 
 public:
 	bool isLevelUp(std::string command);
 	bool isLevelDown(std::string command);
 	bool isDrop(std::string command);
+	bool isRestart(std::string command);
 	bool processCommand(std::string command, Block *blo, Board *b);
 };
 

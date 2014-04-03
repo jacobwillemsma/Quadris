@@ -3,8 +3,8 @@
 
 using namespace std;
 
-ZBlock::ZBlock(Board *b, int level) {
-	level = level;
+ZBlock::ZBlock(Board *b, int lvl) {
+	level = lvl;
 	type = 'Z';
 	positions = new Coordinate[4];
 	config = 1;

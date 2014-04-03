@@ -6,7 +6,7 @@
 class TBlock : public Block {
 	int config; // marks the current configuration of the Block
   public:
-	TBlock(Board *b, int level);
+	TBlock(Board *b, int lvl);
 	~TBlock();
 	
 	void clockwise(Board *b);

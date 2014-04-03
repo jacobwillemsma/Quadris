@@ -1,17 +1,15 @@
 #ifndef __SCORE_H__
 #define __SCORE_H__
-#include <iostream>
-#include <string>
 
 class Score {
 	int score;
-	int highScore;
-	Score();
+	int hiScore;
   public:
+	Score();
 	int getScore();
-	int getHighScore();
+	int getHiScore();
 	void resetScore();
-	void updateScore();
-}
+	void increaseScore(int x);
+};
 
 #endif

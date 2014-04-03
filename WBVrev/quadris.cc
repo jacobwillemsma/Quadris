@@ -12,11 +12,13 @@
 #include "textdisplay.h"
 #include "board.h"
 #include "cell.h"
+#include "score.h"
 #include "nextblock.h"
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 using namespace std;
 
 Block * getNewBlock(char blockname, Board *b, int level){
@@ -42,6 +44,7 @@ int main(int argc, const char * argv[]) {
 	bool textOnly = true;
 	int level = 0;
 	string filename = "sequence.txt";
+	int seed = time(NULL);
 
 	for (int i = 0; i < argc; i++) {
 		string arg = argv[i];
@@ -56,15 +59,21 @@ int main(int argc, const char * argv[]) {
             if (num >= 0 && num <=3)
             	level = num;
 		}
+		if (arg == "-seed") {
+            stringstream ss(argv[i + 1]);
+            ss >> seed;
+		}
 	}
 
-	NextBlock *newB = new NextBlock(level, filename);
+	NextBlock *newB = new NextBlock(level, filename, seed);
 	Board *b = new Board();
 	Interpreter *i = new Interpreter();
+	Score *scr = new Score();
     Block *currentBlock = getNewBlock(newB->getBlockType(), b, level);
     char nextBlock = newB->getBlockType();
     
-	b->updateDisplay(level, 100, 100, nextBlock);
+	b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
+	
 	cout << *b;
 	string command;
 	while (cin >> command) {
@@ -72,7 +81,8 @@ int main(int argc, const char * argv[]) {
 			i->processCommand(command, currentBlock, b);
 			//char blockname = nb->getBlockType();
 			//cout << "blockname has value " << blockname << endl;
-			b->rowsChecker(); // check if the drop caused any rows to be filled
+			int rows = b->rowsChecker(); // check if the drop caused any rows to be filled and returns the number of rows removed
+			
 			currentBlock = getNewBlock(nextBlock, b, level);
 			nextBlock = newB->getBlockType();
 			
@@ -81,30 +91,47 @@ int main(int argc, const char * argv[]) {
 				break;
 			}
 			
-			b->updateDisplay(level, 100, 100, nextBlock);
+			if(rows)
+				scr->increaseScore(((rows+level) * (rows+level)));
+			b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
 			cout << *b;
 		}
 		else if (i->isLevelUp(command)) {
 			if (level < 3) {
 				level++;
-				b->updateDisplay(level, 100, 100, nextBlock);
-				cout << *b;
+				newB->addLevel();
+				b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
 			}
+			cout << *b;
 		}
 		else if (i->isLevelDown(command)) {
 			if (level > 0) {
 				level--;
-				b->updateDisplay(level, 100, 100, nextBlock);
-				cout << *b;
+				newB->subLevel();
+				b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
 			}
+			cout << *b;
+		}
+		else if (i->isRestart(command)) {
+			scr->resetScore();
+			b->clearBoard();
+			currentBlock = getNewBlock(nextBlock, b, level);
+			nextBlock = newB->getBlockType();
+			b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
+			cout << *b;
 		}
 
 		else {
-		i->processCommand(command, currentBlock, b);
-		// Print out the board every time.
-			b->updateDisplay(level, 100, 100, nextBlock);
+			i->processCommand(command, currentBlock, b);
+			// Print out the board every time.
+			b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
 			cout << *b;
 		}
 	}
-	cout << *b;
+	delete b;
+	//delete currentBlock;
+	delete i;
+	delete scr;
+	delete newB;
+	//cout << *b; do we want this??
 }

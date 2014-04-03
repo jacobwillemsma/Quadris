@@ -6,7 +6,7 @@
 class JBlock : public Block {
 	int config; // marks the current configuration of the Block
   public:
-	JBlock(Board *b, int level);
+	JBlock(Board *b, int lvl);
 	~JBlock();
 	
 	void clockwise(Board *b);

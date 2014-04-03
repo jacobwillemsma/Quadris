@@ -6,7 +6,7 @@
 class ZBlock : public Block {
 	int config; // marks the current configuration of the Block
   public:
-	ZBlock(Board *b, int level);
+	ZBlock(Board *b, int lvl);
 	~ZBlock();
 	
 	void clockwise(Board *b);
