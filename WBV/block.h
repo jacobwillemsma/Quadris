@@ -21,11 +21,12 @@ class Block {
 	void right(Board *b);
 	void down(Board *b);
 	void drop(Board *b);
-	void clockwise(Board *b) = 0;
-	void counterclockwise(Board *b) = 0;
 	
 	int getLevel();
 	char getType();
+	
+	virtual void clockwise(Board *b) = 0;
+	virtual void counterclockwise(Board *b) = 0;
 };
 
 #endif

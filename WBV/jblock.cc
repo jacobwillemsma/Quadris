@@ -30,26 +30,16 @@ void JBlock::clockwise(Board *b){ // r and c not needed here
 	}
 	
 	if(config == 1){
-		positions[0].addY(-3);
-		// positions[0].addX() does not change
-		positions[1].addY(-2);
-		positions[1].addX(-1);
-		positions[2].addY(-1);
-		positions[2].addX(-2);
-		// positions[3] does not change
-		positions[3].addX(-3);
+		configTwo(positions[1].getY(), positions[1].getX());
 	}
-	else if(positions[0].getX() == positions[1].getX()){
-		if(positions[0].getX() < 7){
-			positions[0].addY(3);
-			// positions[0].addY() does not change
-			positions[1].addY(2);
-			positions[1].addX(1);
-			positions[2].addY(1);
-			positions[2].addX(2);
-			// positions[3].addY() does not change
-			positions[3].addX(3);
-		}
+	else if(config == 2){
+		configThree(positions[2].getY(), positions[2].getX());
+	}
+	else if(config == 3){
+		configFour(positions[0].getY() + 1, positions[0].getX());
+	}
+	else if(config == 4){
+		configOne(positions[0].getY(), positions[0].getX());
 	}
 	
 	// Update the display
@@ -59,49 +49,60 @@ void JBlock::clockwise(Board *b){ // r and c not needed here
 }
 
 void JBlock::counterclockwise(Board *b){ // r and c not needed here
-	return clockwise(b);
+	if(config == 1){
+		configFour(positions[0].getY() + 1, positions[0].getX());
+	}
+	else if(config == 2){
+		configOne(positions[0].getY(), positions[0].getX());
+	}
+	else if(config == 3){
+		configTwo(positions[1].getY(), positions[1].getX());
+	}
+	else if(config == 4){
+		configThree(positions[2].getY(), positions[2].getX());
+	}
 }
 
 void JBlock::configOne(int r, int c){
-	positions[0] = r-1;
-	positions[1] = c;
-	positions[2] = r;
-	positions[3] = c;
-	positions[4] = r;
-	positions[5] = c+1;
-	positions[6] = r;
-	positions[7] = c+2;
+	positions[0].setY(r-1);
+	positions[0].setX(c);
+	positions[1].setY(r);
+	positions[1].setX(c+1);
+	positions[2].setY(r);
+	positions[2].setX(c+1);
+	positions[3].setY(r);
+	positions[3].setX(c+2);
 }
 
 void JBlock::configTwo(int r, int c){
-	positions[0] = r-2;
-	positions[1] = c;
-	positions[2] = r-1;
-	positions[3] = c;
-	positions[4] = r;
-	positions[5] = c;
-	positions[6] = r-2;
-	positions[7] = c+1;
+	positions[0].setY(r-2);
+	positions[0].setX(c);
+	positions[1].setY(r-1);
+	positions[1].setX(c);
+	positions[2].setY(r);
+	positions[2].setX(c);
+	positions[3].setY(r-2);
+	positions[3].setX(c+1);
 }
 
 void JBlock::configThree(int r, int c){
-	positions[0] = r-1;
-	positions[1] = c;
-	positions[2] = r-1;
-	positions[3] = c+1;
-	positions[4] = r-1;
-	positions[5] = c+2;
-	positions[6] = r;
-	positions[7] = c+2;
+	positions[0].setY(r-1);
+	positions[0].setX(c);
+	positions[1].setY(r-1);
+	positions[1].setX(c+1);
+	positions[2].setY(r-1);
+	positions[2].setX(c+2);
+	positions[3].setY(r);
+	positions[3].setX(c+2);
 }
 
 void JBlock::configFour(int r, int c){
-	positions[0] = r;
-	positions[1] = c;
-	positions[2] = r-2;
-	positions[3] = c+1;
-	positions[4] = r-1;
-	positions[5] = c+1;
-	positions[6] = r;
-	positions[7] = c+1;
+	positions[0].setY(r);
+	positions[0].setX(c);
+	positions[1].setY(r-2);
+	positions[1].setX(c+1);
+	positions[2].setY(r-1);
+	positions[2].setX(c+1);
+	positions[3].setY(r);
+	positions[3].setX(c+1);
 }
