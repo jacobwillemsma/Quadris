@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
         Block *blo = new Block(b);
     else if (blockname == 'J')
     	Block *blo = new jBlock(b);	*/
-    Block *currentBlock = new OBlock(b);
+    Block *currentBlock = new TBlock(b);
 	cout << *b;
 	string command;
 	while (cin >> command) {
@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
 		    else if (blockname == 'J')
 		    	Block *blo = new jBlock(b);	*/
 		    //delete currentBlock;
-			currentBlock = new JBlock(b);
+			currentBlock = new TBlock(b);
 			cout << *b;
 		}
 		else {
