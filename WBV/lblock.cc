@@ -3,7 +3,9 @@
 
 using namespace std;
 
-LBlock::LBlock(Board *b) : level(0), type('L'){
+LBlock::LBlock(Board *b) {
+	level = 0;
+	type = 'L';
 	positions = new Coordinate[4];
 	config = 1;
 	
@@ -36,19 +38,19 @@ void LBlock::clockwise(Board *b){ // r and c not needed here
 	
 	if(config == 1){
 		configTwo(positions[0].getY(), positions[0].getX());
-		config 2;
+		config = 2;
 	}
 	else if(config == 2){
 		configThree(positions[2].getY(), positions[2].getX());
-		config 3;
+		config = 3;
 	}
 	else if(config == 3){
 		configFour(positions[1].getY(), positions[1].getX());
-		config 4;
+		config = 4;
 	}
 	else if(config == 4){
 		configOne(positions[0].getY() + 2, positions[0].getX());
-		config 1;
+		config = 1;
 	}
 	
 	// Update the display
@@ -65,19 +67,19 @@ void LBlock::counterclockwise(Board *b){ // r and c not needed here
 	
 	if(config == 1){
 		configFour(positions[0].getY(), positions[0].getX());
-		config 4;
+		config = 4;
 	}
 	else if(config == 2){
 		configOne(positions[2].getY(), positions[2].getX());
-		config 1;
+		config = 1;
 	}
 	else if(config == 3){
 		configTwo(positions[1].getY(), positions[1].getX());
-		config 2;
+		config = 2;
 	}
 	else if(config == 4){
 		configThree(positions[0].getY() + 2, positions[0].getX());
-		config 3;
+		config = 3;
 	}
 	
 	// Update the display
