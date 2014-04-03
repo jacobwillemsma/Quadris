@@ -11,7 +11,6 @@ class JBlock : public Block {
 	
 	void clockwise(Board *b);
 	void counterclockwise(Board *b);
-	void updatePositions();
 	
 	void configOne(int r, int c);
 	void configTwo(int r, int c);
