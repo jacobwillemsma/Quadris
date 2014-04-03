@@ -3,7 +3,9 @@
 
 using namespace std;
 
-TBlock::TBlock(Board *b) : level(0), type('L'){
+TBlock::TBlock(Board *b) {
+	level = 0;
+	type = 'T';
 	positions = new Coordinate[4];
 	config = 1;
 	
@@ -15,11 +17,14 @@ TBlock::TBlock(Board *b) : level(0), type('L'){
 	positions[2].setY(4);
 	positions[3].setX(2);
 	positions[3].setY(3);
-	
-	cout << *b;
+
+	// Let the cells and the display know that they are present.
+	for (int i = 0; i < 4; i++) {
+		b->update(positions[i].getY(), positions[i].getX(), type);
+	}
 }
 
-TBlock::~TBlock(){
+TBlock::~TBlock() {
 	delete [] positions;
 }
 
