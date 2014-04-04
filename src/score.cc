@@ -1,5 +1,4 @@
 #include "score.h"
-using namespace std;
 
 Score::Score() {
 	this->score = 0;
