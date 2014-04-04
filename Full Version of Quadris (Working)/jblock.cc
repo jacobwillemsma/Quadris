@@ -1,7 +1,13 @@
 #include "jblock.h"
-#include <iostream>
-
 using namespace std;
+
+
+/*
+Constructor and destructor.
+The constructor is in charge of creating the initial positions of a block
+on the board.
+The destructor deletes the position area or coordinates.
+*/
 
 JBlock::JBlock(Board *b, int lvl) {
 	level = lvl;
@@ -18,6 +24,7 @@ JBlock::JBlock(Board *b, int lvl) {
 	positions[3].setX(2);
 	positions[3].setY(4);
 	
+	// Checks for if the Game is Over, if it is, it set gameOver to true.
 	gameOver = false;
 	for (int i = 0; i < 4; i++) {
 		if (b->isOccupied(positions[i].getY(), positions[i].getX()))
@@ -33,6 +40,13 @@ JBlock::JBlock(Board *b, int lvl) {
 JBlock::~JBlock(){
 	delete [] positions;
 }
+
+
+/*
+The rotate functions rotate the block based on it's current configuration into it's
+"next" rotational configuration based off of configs and config methods.  They also
+subsequently check if the rotate is permitted.
+*/
 
 void JBlock::clockwise(Board *b){ // r and c not needed here
 	bool temp = true;
@@ -62,7 +76,6 @@ void JBlock::clockwise(Board *b){ // r and c not needed here
 		if (positions[i].getY() > 17 || positions[i].getX() > 9 || positions[i].getX() < 0 || b->isOccupied(positions[i].getY(), positions[i].getX()))
 			temp = false;
 	}
-	
 	
 	if(!temp){
 		if(config == 1){
@@ -118,7 +131,6 @@ void JBlock::counterclockwise(Board *b){ // r and c not needed here
 			temp = false;
 	}
 	
-	
 	if(!temp){
 		if(config == 1){
 			configTwo(positions[1].getY(), positions[1].getX());
@@ -138,11 +150,18 @@ void JBlock::counterclockwise(Board *b){ // r and c not needed here
 		}
 	}
 		
-		// Update the display
-		for (int i = 0; i < 4; i++) {
-			b->update(positions[i].getY(), positions[i].getX(), type);
-		}
+	// Update the display
+	for (int i = 0; i < 4; i++) {
+		b->update(positions[i].getY(), positions[i].getX(), type);
+	}
 }
+
+
+/*
+The configuration methods take in a reference row and column and according
+to a block type specific algorithm generates the "next" state of a given
+block.  It is essential for rotation.
+*/
 
 void JBlock::configOne(int r, int c){
 	positions[0].setY(r-1);
@@ -187,5 +206,3 @@ void JBlock::configFour(int r, int c){
 	positions[3].setY(r);
 	positions[3].setX(c+1);
 }
-
-void JBlock::updatePositions() {}

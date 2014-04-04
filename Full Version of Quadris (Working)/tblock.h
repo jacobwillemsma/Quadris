@@ -1,11 +1,11 @@
 #ifndef __TBLOCK_H__
 #define __TBLOCK_H__
-
 #include "block.h"
 
 class TBlock : public Block {
-	int config; // marks the current configuration of the Block
-  public:
+	int config;
+
+public:
 	TBlock(Board *b, int lvl);
 	~TBlock();
 	

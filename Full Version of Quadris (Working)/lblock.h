@@ -1,10 +1,10 @@
 #ifndef __LBLOCK_H__
 #define __LBLOCK_H__	
-
 #include "block.h"
 
 class LBlock : public Block {
-	int config; // marks the current configuration of the Block
+	int config;
+
 public:
 	LBlock(Board *b, int lvl);
 	~LBlock();

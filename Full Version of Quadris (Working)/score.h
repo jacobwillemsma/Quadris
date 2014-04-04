@@ -4,8 +4,10 @@
 class Score {
 	int score;
 	int hiScore;
-  public:
+
+public:
 	Score();
+	
 	int getScore();
 	int getHiScore();
 	void resetScore();

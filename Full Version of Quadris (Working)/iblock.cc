@@ -1,7 +1,13 @@
 #include "iblock.h"
-#include <iostream>
-
 using namespace std;
+
+
+/*
+Constructor and destructor.
+The constructor is in charge of creating the initial positions of a block
+on the board.
+The destructor deletes the position area or coordinates.
+*/
 
 IBlock::IBlock(Board *b, int lvl) {
 	level = lvl;
@@ -13,6 +19,7 @@ IBlock::IBlock(Board *b, int lvl) {
 		positions[i].setY(3);
 	}
 	
+	// Checks for if the Game is Over, if it is, it set gameOver to true.
 	gameOver = false;
 	for (int i = 0; i < 4; ++i) {
 		if (b->isOccupied(positions[i].getY(), positions[i].getX()))
@@ -27,6 +34,12 @@ IBlock::IBlock(Board *b, int lvl) {
 IBlock::~IBlock(){
 	delete [] positions;
 }
+
+
+/*
+The rotate functions rotate the block based on it's current configuration into it's
+"next" rotational configuration. They also subsequently check if the rotate is permitted.
+*/
 
 void IBlock::clockwise(Board *b){ // r and c not needed here
 	bool temp = true;

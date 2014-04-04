@@ -1,11 +1,11 @@
 #ifndef __ZBLOCK_H__
 #define __ZBLOCK_H__
-
 #include "block.h"
 
 class ZBlock : public Block {
-	int config; // marks the current configuration of the Block
-  public:
+	int config;
+
+public:
 	ZBlock(Board *b, int lvl);
 	~ZBlock();
 	

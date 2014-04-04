@@ -5,18 +5,17 @@
 
 class TextDisplay {
   int rows, cols;
-  int level, score, hiScore; // variables for printing
-  char next; // marks the next block to display
+  int level, score, hiScore;
+  char next;
   char **theDisplay;
   
- public:
+public:
   TextDisplay(int r, int c);
-  void notify(int r, int c, char ch);
   ~TextDisplay();
-  
-  void update(int lvl, int scr, int hiscr, char type); // updates level and scores for printing
 
-  friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td); // prints the TextDisplay
+  void notify(int r, int c, char ch);
+  void update(int lvl, int scr, int hiscr, char type);
+  friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };
 
 #endif

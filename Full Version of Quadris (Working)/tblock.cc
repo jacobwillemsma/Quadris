@@ -1,7 +1,13 @@
 #include "tblock.h"
-#include <iostream>
-
 using namespace std;
+
+
+/*
+Constructor and destructor.
+The constructor is in charge of creating the initial positions of a block
+on the board.
+The destructor deletes the position area or coordinates.
+*/
 
 TBlock::TBlock(Board *b, int lvl) {
 	level = lvl;
@@ -18,6 +24,7 @@ TBlock::TBlock(Board *b, int lvl) {
 	positions[3].setX(2);
 	positions[3].setY(3);
 	
+	// Checks for if the Game is Over, if it is, it set gameOver to true.
 	gameOver = false;
 	for (int i = 0; i < 4; i++) {
 		if (b->isOccupied(positions[i].getY(), positions[i].getX()))
@@ -33,6 +40,13 @@ TBlock::TBlock(Board *b, int lvl) {
 TBlock::~TBlock() {
 	delete [] positions;
 }
+
+
+/*
+The rotate functions rotate the block based on it's current configuration into it's
+"next" rotational configuration based off of configs and config methods.  They also
+subsequently check if the rotate is permitted.
+*/
 
 void TBlock::clockwise(Board *b){ // r and c not needed here
 	bool temp = true;
@@ -143,6 +157,13 @@ void TBlock::counterclockwise(Board *b){ // r and c not needed here
 		b->update(positions[i].getY(), positions[i].getX(), type);
 	}
 }
+
+
+/*
+The configuration methods take in a reference row and column and according
+to a block type specific algorithm generates the "next" state of a given
+block.  It is essential for rotation.
+*/
 
 void TBlock::configOne(int r, int c){
 	positions[0].setY(r-1);

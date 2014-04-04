@@ -3,7 +3,6 @@
 
 #include "block.h"
 #include "board.h"
-#include <iostream>
 #include <string>
 
 class Interpreter {
@@ -19,8 +18,8 @@ public:
 	bool isLevelDown(std::string command);
 	bool isDrop(std::string command);
 	bool isRestart(std::string command);
-	bool processCommand(std::string command, Block *blo, Board *b);
-	bool multipleCommand(int multiplier, std::string command, Block *blo, Board *b);
+	void processCommand(std::string command, Block *blo, Board *b);
+	void multipleCommand(int multiplier, std::string command, Block *blo, Board *b);
 };
 
 #endif

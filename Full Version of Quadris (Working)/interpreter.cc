@@ -1,6 +1,13 @@
 #include "interpreter.h"
 using namespace std;
 
+
+/*
+The following methods are predicates to check if a command is any one of the valid
+ones the application understands.  It does so by checking if it matches any of the 
+required commands.  If it does, then the method returns true, false if not.
+*/
+
 bool Interpreter::isLeft(string command) {
 	if (command.length() == 3)
 		return command == "lef";
@@ -140,71 +147,46 @@ bool Interpreter::isRestart(string command) {
 		return false;
 }
 
+
+/*
+The following method returns true if the command is any one of the acceptable commands.
+*/
+
 bool Interpreter::isValid(string command) {
 	return (isLeft(command) || isRight(command) || isDown(command) || isClockwise(command) || isCounterClockwise(command) || isDrop(command) || isLevelUp(command) || isLevelDown(command) || isRestart(command));
 }
 
-bool Interpreter::processCommand(string command, Block *blo, Board *b) {
+
+/*
+The following method is for processing a single command.
+*/
+
+void Interpreter::processCommand(string command, Block *blo, Board *b) {
+
+	// If the command is valid, then process the command on the board.
 	if (isValid(command)) {
-		if (isLeft(command)) {
+		if (isLeft(command))
 			blo->left(b);
-			return true;
-		}
-		else if (isRight(command)) {
+		else if (isRight(command))
 			blo->right(b);
-			return true;
-		}
-		else if (isDown(command)) {
-			// Move block down
+		else if (isDown(command))
 			blo->down(b);
-			return true;
-		}
-		else if (isDrop(command)) {
-			// Drops the block
+		else if (isDrop(command))
 			blo->drop(b);
-			return true;
-			// Somewhere in here the game may need to end?  Maybe we'll just check seperately in the main program.
-		}
-		else if (isClockwise(command)) {
-			// Drops the block
+		else if (isClockwise(command))
 			blo->clockwise(b);
-			return true;
-		}
-		else if (isCounterClockwise(command)) {
-			// Drops the block
+		else if (isCounterClockwise(command))
 			blo->counterclockwise(b);
-			return true;
-		}
-		else if (isLevelUp(command)) {
-			// Drops the block
-			//level UP
-			return true;
-		}
-		else if (isLevelDown(command)) {
-			// Drops the block
-			// level DOWN
-			return true;
-		}
-		else if (isRestart(command)) {
-			// Drops the block
-			// RESTART!
-			return true;
-		}
-		else 
-			return false;
 	}
-	else
-		return false;
 }
 
-bool Interpreter::multipleCommand(int multiplier, string command, Block *blo, Board *b) {
+/*
+The following method is for processing a number first command.
+*/
+
+void Interpreter::multipleCommand(int multiplier, string command, Block *blo, Board *b) {
 	if (isValid(command)) {
 		for (int i = 0; i < multiplier; i++)
 			processCommand(command, blo, b);
-		
-		return true;
 	}
-	
-	else
-		return false;
 }

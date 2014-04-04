@@ -1,11 +1,11 @@
 #ifndef __SBLOCK_H__
 #define __SBLOCK_H__
-
 #include "block.h"
 
 class SBlock : public Block {
-	int config; // marks the current configuration of the Block
-  public:
+	int config;
+
+public:
 	SBlock(Board *b, int lvl);
 	~SBlock();
 	

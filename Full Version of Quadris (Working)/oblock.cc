@@ -1,7 +1,12 @@
 #include "oblock.h"
-#include <iostream>
-
 using namespace std;
+
+/*
+Constructor and destructor.
+The constructor is in charge of creating the initial positions of a block
+on the board.
+The destructor deletes the position area or coordinates.
+*/
 
 OBlock::OBlock(Board *b, int lvl) {
 	level = lvl;
@@ -32,6 +37,11 @@ OBlock::OBlock(Board *b, int lvl) {
 OBlock::~OBlock(){
 	delete [] positions;
 }
+
+
+/*
+OBlocks cannot rotate.
+*/
 
 void OBlock::clockwise(Board *b){}
 

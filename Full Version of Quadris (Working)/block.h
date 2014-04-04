@@ -14,8 +14,6 @@ protected:
 	bool canShiftLeft(Board *b);
 	bool canShiftRight(Board *b);
 	bool canMoveDown(Board *b);
-	bool canRotateClockwise(Board *b);
-	bool canRotateCounterClockwise(Board *b);
 	
 public:
 	Block();
