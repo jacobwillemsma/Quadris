@@ -4,7 +4,6 @@ using namespace std;
 Block::Block() {}
 Block::~Block(){
 	delete [] positions;
-
 }
 bool Block::canShiftLeft(Board *b) {
 	for (int i = 0; i < 4; i++) {

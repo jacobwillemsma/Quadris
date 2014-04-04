@@ -19,7 +19,9 @@ Board::~Board(){
 	for(int i = 0; i < BOARD_HEIGHT; ++i){
 		delete [] theBoard[i];
 	}
+	delete [] theBoard;
 	delete td;
+	delete [] current;
 }
 
 void Board::clearBoard(){

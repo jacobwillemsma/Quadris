@@ -3,9 +3,9 @@ using namespace std;
 
 Block::Block() {}
 Block::~Block(){
-	delete [] positions;
-
+	//delete [] positions;
 }
+
 bool Block::canShiftLeft(Board *b) {
 	for (int i = 0; i < 4; i++) {
 		if (positions[i].getX() == 0 || b->isOccupied(positions[i].getY(), positions[i].getX() - 1)) 

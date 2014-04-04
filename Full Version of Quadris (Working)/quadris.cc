@@ -78,12 +78,12 @@ int main(int argc, const char * argv[]) {
 	string command;
 	while (cin >> command) {
 		if (i->isDrop(command)) {
-			cout << "shouldn't be here" << endl;
 			i->processCommand(command, currentBlock, b);
 			//char blockname = nb->getBlockType();
 			//cout << "blockname has value " << blockname << endl;
 			int rows = b->rowsChecker(); // check if the drop caused any rows to be filled and returns the number of rows removed
 			
+			delete currentBlock;
 			currentBlock = getNewBlock(nextBlock, b, level);
 			nextBlock = newB->getBlockType();
 			
@@ -117,6 +117,7 @@ int main(int argc, const char * argv[]) {
 		else if (i->isRestart(command)) {
 			scr->resetScore();
 			b->clearBoard();
+			delete currentBlock;
 			currentBlock = getNewBlock(nextBlock, b, level);
 			nextBlock = newB->getBlockType();
 			b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
@@ -145,6 +146,8 @@ int main(int argc, const char * argv[]) {
 
 					int rows = b->rowsChecker(); // check if the drop caused any rows to be filled and returns the number of rows removed
 					
+					
+					delete currentBlock;
 					currentBlock = getNewBlock(nextBlock, b, level);
 					nextBlock = newB->getBlockType();
 					
@@ -165,6 +168,7 @@ int main(int argc, const char * argv[]) {
 			else if (i->isRestart(subCommand)) {
 				scr->resetScore();
 				b->clearBoard();
+				delete currentBlock;
 				currentBlock = getNewBlock(nextBlock, b, level);
 				nextBlock = newB->getBlockType();
 				b->updateDisplay(level, scr->getScore(), scr->getHiScore(), nextBlock);
@@ -208,9 +212,9 @@ int main(int argc, const char * argv[]) {
 			cout << *b;
 		}
 	}
-	delete b;
-	//delete currentBlock;
+	delete currentBlock;
 	delete i;
 	delete scr;
 	delete newB;
+	delete b;
 }

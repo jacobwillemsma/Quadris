@@ -129,7 +129,7 @@ int main(int argc, const char * argv[]) {
 		}
 	}
 	delete b;
-	//delete currentBlock;
+	delete currentBlock;
 	delete i;
 	delete scr;
 	delete newB;
